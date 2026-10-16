@@ -1,0 +1,195 @@
+:root {
+  --bg-dark: #0f0a1c;
+  --bg-surface: rgba(26, 18, 48, 0.7);
+  --bg-card: rgba(36, 26, 66, 0.6);
+  --border-glow: rgba(147, 112, 219, 0.25);
+  
+  --text-main: #f5f3fa;
+  --text-muted: #a69ebd;
+  
+  /* 7-Chakra Energy Colors */
+  --chakra-crown: #b388ff;
+  --chakra-third-eye: #536dfe;
+  --chakra-throat: #00e5ff;
+  --chakra-heart: #00e676;
+  --chakra-plexus: #ffd600;
+  --chakra-sacral: #ff9100;
+  --chakra-root: #ff1744;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+body {
+  background: radial-gradient(circle at 50% 10%, #1e1338 0%, var(--bg-dark) 100%);
+  color: var(--text-main);
+  min-height: 100vh;
+  padding: 24px 40px;
+}
+
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--border-glow);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-mark {
+  font-size: 28px;
+  color: var(--chakra-crown);
+  text-shadow: 0 0 12px rgba(179, 136, 255, 0.6);
+}
+
+.logo-title {
+  font-size: 1.3rem;
+  letter-spacing: 0.5px;
+}
+
+.tagline {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.nav-links a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover, .nav-links a.active {
+  color: #fff;
+  border-bottom: 2px solid var(--chakra-crown);
+  padding-bottom: 4px;
+}
+
+.dashboard-container {
+  display: grid;
+  grid-template-columns: 1fr 180px;
+  gap: 32px;
+  margin-top: 32px;
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.subtitle {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-top: 4px;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #fff 0%, #e2d9f7 100%);
+  color: #120924;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+}
+
+.intent-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.intent-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-glow);
+  backdrop-filter: blur(12px);
+  border-radius: 14px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.progress-track {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  border-radius: 4px;
+  background: linear-gradient(90deg, var(--chakra-throat), var(--chakra-crown));
+}
+
+/* Alignment Spine */
+.alignment-spine-panel {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-glow);
+  border-radius: 16px;
+  padding: 20px 12px;
+  text-align: center;
+}
+
+.spine-track {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  margin-top: 24px;
+}
+
+.spine-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+.spine-node span {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-glow);
+}
+
+.spine-node.active span {
+  border-color: var(--chakra-plexus);
+  box-shadow: 0 0 12px var(--chakra-plexus);
+}
