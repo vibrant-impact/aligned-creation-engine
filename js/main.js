@@ -125,3 +125,100 @@ document.addEventListener("DOMContentLoaded", () => {
   checkBackendConnection();
   loadIntentions();
 });
+
+// State and elements cache
+const modalOverlay = document.getElementById("goalModalOverlay");
+const openModalBtn = document.getElementById("addIntentBtn");
+const closeModalBtn = document.getElementById("closeModalBtn");
+const cancelGoalBtn = document.getElementById("cancelGoalBtn");
+const newGoalForm = document.getElementById("newGoalForm");
+const intentContainer = document.getElementById("intentContainer");
+
+// Modal toggle functions
+function openGoalModal() {
+  if (!modalOverlay) return;
+  modalOverlay.classList.remove("hidden");
+  modalOverlay.setAttribute("aria-hidden", "false");
+  document.getElementById("goalTitle")?.focus();
+}
+
+function closeGoalModal() {
+  if (!modalOverlay) return;
+  modalOverlay.classList.add("hidden");
+  modalOverlay.setAttribute("aria-hidden", "true");
+  newGoalForm?.reset();
+}
+
+// API Submission handler
+async function handleGoalSubmit(event) {
+  event.preventDefault();
+
+  const titleInput = document.getElementById("goalTitle");
+  const categoryInput = document.getElementById("goalCategory");
+
+  const goalData = {
+    title: titleInput.value.trim(),
+    category: categoryInput.value.trim()
+  };
+
+  const submitButton = document.getElementById("submitGoalBtn");
+  submitButton.disabled = true;
+  submitButton.textContent = "Igniting...";
+
+  try {
+    const response = await fetch("api/create_intent.php", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify(goalData)
+    });
+
+    const result = await response.json();
+
+    if (!response.ok || result.status !== "success") {
+      throw new Error(result.message || "Failed to create intent");
+    }
+
+    closeGoalModal();
+    // Reload intentions list from MySQL
+    loadIntentions();
+  } catch (submissionError) {
+    console.error("Submission failed:", submissionError);
+    alert(`Error: ${submissionError.message}`);
+  } finally {
+    submitButton.disabled = false;
+    submitButton.textContent = "Ignite Journey";
+  }
+}
+
+// Event bindings
+function setupModalEvents() {
+  openModalBtn?.addEventListener("click", openGoalModal);
+  closeModalBtn?.addEventListener("click", closeGoalModal);
+  cancelGoalBtn?.addEventListener("click", closeGoalModal);
+
+  // Close when clicking outside the modal box
+  modalOverlay?.addEventListener("click", (event) => {
+    if (event.target === modalOverlay) {
+      closeGoalModal();
+    }
+  });
+
+  // Handle escape key
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && !modalOverlay?.classList.contains("hidden")) {
+      closeGoalModal();
+    }
+  });
+
+  newGoalForm?.addEventListener("submit", handleGoalSubmit);
+}
+
+// Initialize on page load
+document.addEventListener("DOMContentLoaded", () => {
+  checkBackendConnection();
+  loadIntentions();
+  setupModalEvents();
+});

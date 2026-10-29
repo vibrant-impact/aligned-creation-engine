@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Creation Engine | Aligned Intent, Manifesting Reality</title>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css?v=2">
 </head>
+
 <body>
   <header class="app-header">
     <div class="brand">
@@ -42,17 +44,67 @@
       <h3>Alignment Spine</h3>
       <div class="spine-track">
         <div class="spine-line"></div>
-        <div class="spine-node crown" title="Crown: Purpose"><span>👑</span><p>Crown</p></div>
-        <div class="spine-node third-eye" title="Third Eye: Vision"><span>👁️</span><p>Third Eye</p></div>
-        <div class="spine-node throat" title="Throat: Voice"><span>🗣️</span><p>Throat</p></div>
-        <div class="spine-node heart" title="Heart: Feeling"><span>💚</span><p>Heart</p></div>
-        <div class="spine-node plexus active" title="Solar Plexus: Action"><span>☀️</span><p>Solar Plexus</p></div>
-        <div class="spine-node sacral" title="Sacral: Creation"><span>🎨</span><p>Sacral</p></div>
-        <div class="spine-node root" title="Root: Physical"><span>🌍</span><p>Root</p></div>
+        <div class="spine-node crown" title="Crown: Purpose"><span>👑</span>
+          <p>Crown</p>
+        </div>
+        <div class="spine-node third-eye" title="Third Eye: Vision"><span>👁️</span>
+          <p>Third Eye</p>
+        </div>
+        <div class="spine-node throat" title="Throat: Voice"><span>🗣️</span>
+          <p>Throat</p>
+        </div>
+        <div class="spine-node heart" title="Heart: Feeling"><span>💚</span>
+          <p>Heart</p>
+        </div>
+        <div class="spine-node plexus active" title="Solar Plexus: Action"><span>☀️</span>
+          <p>Solar Plexus</p>
+        </div>
+        <div class="spine-node sacral" title="Sacral: Creation"><span>🎨</span>
+          <p>Sacral</p>
+        </div>
+        <div class="spine-node root" title="Root: Physical"><span>🌍</span>
+          <p>Root</p>
+        </div>
       </div>
     </aside>
   </main>
 
+  <!-- Add New Goal / Intent Modal -->
+  <div id="goalModalOverlay" class="modal-overlay hidden" aria-hidden="true">
+    <div class="modal-container" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-header">
+        <h3 id="modalTitle">Ignite New Intent</h3>
+        <button id="closeModalBtn" class="btn-close" aria-label="Close modal">&times;</button>
+      </div>
+
+      <form id="newGoalForm" class="modal-form">
+        <div class="form-group">
+          <label for="goalTitle">Intention Name / Vision Anchor</label>
+          <input type="text" id="goalTitle" name="goalTitle"
+            placeholder="e.g., Launch Creative Studio, Run First Marathon" required autocomplete="off" />
+        </div>
+
+        <div class="form-group">
+          <label for="goalCategory">Life Domain / Category</label>
+          <select id="goalCategory" name="goalCategory" required>
+            <option value="" disabled selected>Select a domain...</option>
+            <option value="Career & Business">Career & Business</option>
+            <option value="Creative Expression">Creative Expression</option>
+            <option value="Vitality & Body">Vitality & Body</option>
+            <option value="Spiritual & Mindset">Spiritual & Mindset</option>
+            <option value="Relationships & Community">Relationships & Community</option>
+          </select>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" id="cancelGoalBtn" class="btn-secondary">Cancel</button>
+          <button type="submit" id="submitGoalBtn" class="btn-primary">Ignite Journey</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <script src="js/main.js"></script>
 </body>
+
 </html>
