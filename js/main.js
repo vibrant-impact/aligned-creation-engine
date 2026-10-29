@@ -106,3 +106,22 @@ function showConnectionBadge(serverData) {
 document.addEventListener("DOMContentLoaded", () => {
   checkBackendConnection();
 });
+
+async function loadIntentions() {
+  try {
+    const response = await fetch("api/get_intentions.php");
+    const result = await response.json();
+
+    if (result.status === "success" && result.data.length > 0) {
+      renderIntentions(result.data);
+    }
+  } catch (error) {
+    console.warn("Could not load from DB, fallback to default views", error);
+  }
+}
+
+// Call inside DOMContentLoaded
+document.addEventListener("DOMContentLoaded", () => {
+  checkBackendConnection();
+  loadIntentions();
+});
