@@ -1,0 +1,10 @@
+{
+  "/api": {
+    "target": "http://localhost/the-creation-engine/backend",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/api": ""
+    }
+  }
+}

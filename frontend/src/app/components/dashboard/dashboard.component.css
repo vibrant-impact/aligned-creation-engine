@@ -1,0 +1,67 @@
+.dashboard-container {
+  display: grid;
+  grid-template-columns: 1fr 180px;
+  gap: 32px;
+  margin-top: 32px;
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.subtitle {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-top: 4px;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #fff 0%, #e2d9f7 100%);
+  color: #120924;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+}
+
+.intent-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.intent-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-glow);
+  backdrop-filter: blur(12px);
+  border-radius: 14px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.progress-track {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  border-radius: 4px;
+  background: linear-gradient(90deg, var(--chakra-throat), var(--chakra-crown));
+}

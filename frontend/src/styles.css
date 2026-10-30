@@ -1,0 +1,18 @@
+:root {
+  --bg-dark: #0f0a1c;
+  --bg-surface: rgba(26, 18, 48, 0.7);
+  --bg-card: rgba(36, 26, 66, 0.6);
+  --border-glow: rgba(147, 112, 219, 0.25);
+  
+  --text-main: #f5f3fa;
+  --text-muted: #a69ebd;
+  
+  /* 7-Chakra Energy Colors */
+  --chakra-crown: #b388ff;
+  --chakra-third-eye: #536dfe;
+  --chakra-throat: #00e5ff;
+  --chakra-heart: #00e676;
+  --chakra-plexus: #ffd600;
+  --chakra-sacral: #ff9100;
+  --chakra-root: #ff1744;
+}
