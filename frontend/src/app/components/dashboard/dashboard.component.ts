@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { IntentService, IntentionItem } from '../../services/intent.service';
 import { AlignmentSpineComponent } from '../alignment-spine/alignment-spine.component';
@@ -16,7 +17,10 @@ export class DashboardComponent implements OnInit {
   public intentions$: Observable<IntentionItem[]>;
   public isGoalModalOpen: boolean = false;
 
-  constructor(private readonly intentService: IntentService) {
+  constructor(
+    private readonly intentService: IntentService,
+    private readonly router: Router
+  ) {
     this.intentions$ = this.intentService.intentions$;
   }
 
@@ -30,5 +34,9 @@ export class DashboardComponent implements OnInit {
 
   public closeModal(): void {
     this.isGoalModalOpen = false;
+  }
+
+  public navigateToWorkshop(intentId: number | string): void {
+    this.router.navigate(['/workshop', intentId]);
   }
 }

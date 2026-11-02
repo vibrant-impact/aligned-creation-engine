@@ -1,0 +1,88 @@
+.workshop-layout {
+  display: grid;
+  grid-template-columns: 1fr 180px;
+  gap: 32px;
+  margin-top: 32px;
+}
+
+.workshop-header {
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.back-link {
+  color: var(--chakra-crown);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: opacity 0.2s;
+}
+
+.back-link:hover {
+  opacity: 0.8;
+}
+
+.header-titles {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.header-titles h2 {
+  font-size: 1.6rem;
+  color: var(--text-main);
+}
+
+.category-pill {
+  font-size: 0.75rem;
+  background: rgba(179, 136, 255, 0.15);
+  border: 1px solid var(--chakra-crown);
+  color: var(--chakra-crown);
+  padding: 4px 10px;
+  border-radius: 12px;
+}
+
+.workshop-subtitle {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.workspace-area {
+  margin-top: 20px;
+}
+
+.placeholder-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-glow);
+  border-radius: 16px;
+  padding: 32px;
+  backdrop-filter: blur(12px);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.placeholder-card h3 {
+  color: var(--chakra-plexus);
+  font-size: 1.2rem;
+}
+
+.placeholder-card p {
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.placeholder-card code {
+  color: var(--chakra-throat);
+  background: rgba(0, 229, 255, 0.1);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.hint {
+  font-size: 0.85rem;
+  font-style: italic;
+  margin-top: 8px;
+}

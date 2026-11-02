@@ -21,7 +21,9 @@
           <div class="progress-track">
             <div class="progress-bar" [style.width.%]="intent.progressPercentage"></div>
           </div>
-          <button class="btn-primary open-workshop-btn">Open Workshop</button>
+          <button class="btn-primary open-workshop-btn" (click)="navigateToWorkshop(intent.id)">
+            Open Workshop
+          </button>
         </article>
       }
     </div>

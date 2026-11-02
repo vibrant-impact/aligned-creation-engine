@@ -1,0 +1,24 @@
+<div class="workshop-layout">
+  <div class="workshop-main">
+    <div class="workshop-header">
+      <a routerLink="/dashboard" class="back-link">← Return to Dashboard</a>
+      <div class="header-titles">
+        <h2>{{ currentIntent ? currentIntent.title : 'Intention Workshop' }}</h2>
+        <span class="category-pill">{{ currentIntent ? currentIntent.category : 'General' }}</span>
+      </div>
+      <p class="workshop-subtitle">
+        Focus Stage: <strong>Solar Plexus (Will & Execution)</strong>
+      </p>
+    </div>
+
+    <section class="workspace-area">
+      <div class="placeholder-card">
+        <h3>Stage 5 Workshop Ready</h3>
+        <p>The routing is active for Intention ID: <code>{{ intentId }}</code>.</p>
+        <p class="hint">Next, we can drop the interactive action tool and AI belief reframer into this workspace.</p>
+      </div>
+    </section>
+  </div>
+
+  <app-alignment-spine [activeChakraKey]="'solar_plexus'"></app-alignment-spine>
+</div>
