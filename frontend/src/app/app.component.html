@@ -8,100 +8,10 @@
   </div>
   <nav class="nav-links">
     <a href="#" class="active">Dashboard</a>
-    <a href="#" (click)="openGoalModal($event)">Create New Intent</a>
+    <a href="#">Create New Intent</a>
     <a href="#">My Journeys</a>
     <button class="btn-account">Account</button>
   </nav>
 </header>
 
-<main class="dashboard-container">
-  <section class="intentions-panel">
-    <div class="panel-header">
-      <div>
-        <h2>My Intentions & Project Alignment</h2>
-        <p class="subtitle">Systematically bring your vision into reality through the 7-stage current.</p>
-      </div>
-      <button class="btn-primary" (click)="openGoalModal($event)">+ Add New Goal / Intent</button>
-    </div>
-
-    <div class="intent-cards-grid">
-      @for (intent of intentions; track intent.id) {
-        <article class="intent-card">
-          <div class="card-top">
-            <h3>{{ intent.title }}</h3>
-            <span class="category-tag">{{ intent.category }}</span>
-          </div>
-          <p class="status-text">
-            Status: <strong>{{ intent.alignedNodes }}/{{ intent.totalNodes }} Aligned</strong> ({{ intent.progressPercentage }}%)
-          </p>
-          <div class="progress-track">
-            <div class="progress-bar" [style.width.%]="intent.progressPercentage"></div>
-          </div>
-          <button class="btn-primary open-workshop-btn">Open Workshop</button>
-        </article>
-      }
-    </div>
-  </section>
-
-  <aside class="alignment-spine-panel">
-    <h3>Alignment Spine</h3>
-    <div class="spine-track">
-      <div class="spine-line"></div>
-      <div class="spine-node crown" title="Crown: Purpose"><span>👑</span><p>Crown</p></div>
-      <div class="spine-node third-eye" title="Third Eye: Vision"><span>👁️</span><p>Third Eye</p></div>
-      <div class="spine-node throat" title="Throat: Voice"><span>🗣️</span><p>Throat</p></div>
-      <div class="spine-node heart" title="Heart: Feeling"><span>💚</span><p>Heart</p></div>
-      <div class="spine-node plexus active" title="Solar Plexus: Action"><span>☀️</span><p>Solar Plexus</p></div>
-      <div class="spine-node sacral" title="Sacral: Creation"><span>🎨</span><p>Sacral</p></div>
-      <div class="spine-node root" title="Root: Physical"><span>🌍</span><p>Root</p></div>
-    </div>
-  </aside>
-</main>
-
-<!-- Add New Goal / Intent Modal -->
-<div 
-  class="modal-overlay" 
-  [class.hidden]="!isModalOpen" 
-  [attr.aria-hidden]="!isModalOpen"
-  (click)="onBackdropClick($event)">
-  <div class="modal-container" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-    <div class="modal-header">
-      <h3 id="modalTitle">Ignite New Intent</h3>
-      <button class="btn-close" type="button" aria-label="Close modal" (click)="closeGoalModal()">&times;</button>
-    </div>
-
-    <form class="modal-form" (ngSubmit)="handleGoalSubmit()">
-      <div class="form-group">
-        <label for="goalTitle">Intention Name / Vision Anchor</label>
-        <input 
-          type="text" 
-          id="goalTitle" 
-          name="goalTitle" 
-          [(ngModel)]="newGoalTitle" 
-          placeholder="e.g., Launch Creative Studio, Run First Marathon" 
-          required 
-          autocomplete="off"
-        />
-      </div>
-
-      <div class="form-group">
-        <label for="goalCategory">Life Domain / Category</label>
-        <select id="goalCategory" name="goalCategory" [(ngModel)]="newGoalCategory" required>
-          <option value="" disabled>Select a domain...</option>
-          <option value="Career & Business">Career & Business</option>
-          <option value="Creative Expression">Creative Expression</option>
-          <option value="Vitality & Body">Vitality & Body</option>
-          <option value="Spiritual & Mindset">Spiritual & Mindset</option>
-          <option value="Relationships & Community">Relationships & Community</option>
-        </select>
-      </div>
-
-      <div class="modal-footer">
-        <button type="button" class="btn-secondary" (click)="closeGoalModal()">Cancel</button>
-        <button type="submit" class="btn-primary" [disabled]="isSubmitting">
-          {{ isSubmitting ? 'Igniting...' : 'Ignite Journey' }}
-        </button>
-      </div>
-    </form>
-  </div>
-</div>
+<app-dashboard></app-dashboard>

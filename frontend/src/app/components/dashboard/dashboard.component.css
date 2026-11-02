@@ -19,7 +19,7 @@
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #fff 0%, #e2d9f7 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #e2d9f7 100%);
   color: #120924;
   border: none;
   padding: 10px 20px;
@@ -52,6 +52,16 @@
   align-items: flex-start;
 }
 
+.category-tag {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.status-text {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
 .progress-track {
   width: 100%;
   height: 6px;
@@ -64,4 +74,10 @@
   height: 100%;
   border-radius: 4px;
   background: linear-gradient(90deg, var(--chakra-throat), var(--chakra-crown));
+}
+
+.open-workshop-btn {
+  margin-top: 8px;
+  font-size: 0.8rem;
+  padding: 6px 14px;
 }

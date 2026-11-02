@@ -1,14 +1,33 @@
-  <main class="dashboard-container">
-    <section class="intentions-panel">
-      <div class="panel-header">
-        <div>
-          <h2>My Intentions & Project Alignment</h2>
-          <p class="subtitle">Systematically bring your vision into reality through the 7-stage current.</p>
-        </div>
-        <button id="addIntentBtn" class="btn-primary">+ Add New Goal / Intent</button>
+<main class="dashboard-container">
+  <section class="intentions-panel">
+    <div class="panel-header">
+      <div>
+        <h2>My Intentions & Project Alignment</h2>
+        <p class="subtitle">Systematically bring your vision into reality through the 7-stage current.</p>
       </div>
+      <button class="btn-primary" (click)="openModal()">+ Add New Goal / Intent</button>
+    </div>
 
-      <div class="intent-cards-grid" id="intentContainer">
-        <!-- Rendered via JS -->
-      </div>
-    </section>
+    <div class="intent-cards-grid">
+      @for (intent of (intentions$ | async); track intent.id) {
+        <article class="intent-card">
+          <div class="card-top">
+            <h3>{{ intent.title }}</h3>
+            <span class="category-tag">{{ intent.category }}</span>
+          </div>
+          <p class="status-text">
+            Status: <strong>{{ intent.alignedNodes }}/{{ intent.totalNodes }} Aligned</strong> ({{ intent.progressPercentage }}%)
+          </p>
+          <div class="progress-track">
+            <div class="progress-bar" [style.width.%]="intent.progressPercentage"></div>
+          </div>
+          <button class="btn-primary open-workshop-btn">Open Workshop</button>
+        </article>
+      }
+    </div>
+  </section>
+
+  <app-alignment-spine [activeChakraKey]="'solar_plexus'"></app-alignment-spine>
+</main>
+
+<app-goal-modal [isOpen]="isGoalModalOpen" (closeModal)="closeModal()"></app-goal-modal>

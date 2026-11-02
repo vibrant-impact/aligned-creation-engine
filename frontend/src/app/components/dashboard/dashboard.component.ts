@@ -1,11 +1,34 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Observable } from 'rxjs';
+import { IntentService, IntentionItem } from '../../services/intent.service';
+import { AlignmentSpineComponent } from '../alignment-spine/alignment-spine.component';
+import { GoalModalComponent } from '../goal-modal/goal-modal.component';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule, AlignmentSpineComponent, GoalModalComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
+  public intentions$: Observable<IntentionItem[]>;
+  public isGoalModalOpen: boolean = false;
 
+  constructor(private readonly intentService: IntentService) {
+    this.intentions$ = this.intentService.intentions$;
+  }
+
+  public ngOnInit(): void {
+    this.intentService.fetchIntentions();
+  }
+
+  public openModal(): void {
+    this.isGoalModalOpen = true;
+  }
+
+  public closeModal(): void {
+    this.isGoalModalOpen = false;
+  }
 }

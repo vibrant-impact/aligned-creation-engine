@@ -1,1 +1,15 @@
-<p>alignment-spine works!</p>
+<aside class="alignment-spine-panel">
+  <h3>Alignment Spine</h3>
+  <div class="spine-track">
+    <div class="spine-line"></div>
+    @for (node of chakraNodes; track node.key) {
+      <div 
+        class="spine-node {{ node.key }}" 
+        [class.active]="node.key === activeChakraKey" 
+        [title]="node.name">
+        <span>{{ node.symbol }}</span>
+        <p>{{ node.name }}</p>
+      </div>
+    }
+  </div>
+</aside>
