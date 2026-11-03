@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { AlignmentSpineComponent } from '../alignment-spine/alignment-spine.component';
 import { IntentService, IntentionItem, ActionStep, BeliefTransformation } from '../../services/intent.service';
+import { AudioService } from '../../services/audio.service';
 
 @Component({
   selector: 'app-workshop',
@@ -27,9 +28,10 @@ export class WorkshopComponent implements OnInit {
   public beliefTransformations: BeliefTransformation[] = [];
 
   constructor(
-    private readonly route: ActivatedRoute,
-    private readonly intentService: IntentService
-  ) {}
+  private readonly route: ActivatedRoute,
+  private readonly intentService: IntentService,
+  private readonly audioService: AudioService
+) {}
 
   public ngOnInit(): void {
     this.intentId = this.route.snapshot.paramMap.get('id');
@@ -104,6 +106,9 @@ export class WorkshopComponent implements OnInit {
 
   public handleToggleAction(step: ActionStep): void {
     step.isCompleted = !step.isCompleted;
+    if (step.isCompleted) {
+      this.audioService.playAlignmentChime(528);
+    }
     this.intentService.toggleActionStep(step.id, step.isCompleted).subscribe({
       error: (error) => console.warn('Could not persist toggle status to backend:', error)
     });
