@@ -1,0 +1,244 @@
+<section class="sacral-studio-container">
+  <!-- Section Header -->
+  <div class="studio-header">
+    <div>
+      <span class="chakra-stage-badge">Stage 2: Sacral Center (Svadhisthana)</span>
+      <h3 class="studio-title">Algorithmic Sacred Sigil Studio</h3>
+      <p class="studio-subtitle">
+        Transmute intention into kinetic sacred geometry via Hermetic letter reduction and Pythagorean numerology.
+      </p>
+    </div>
+    <button 
+      type="button" 
+      class="btn-export-svg" 
+      (click)="downloadSvgVector()"
+      title="Export vector illustration for digital art or physical engraving">
+      <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+        <polyline points="7 10 12 15 17 10"></polyline>
+        <line x1="12" y1="15" x2="12" y2="3"></line>
+      </svg>
+      <span>Export SVG</span>
+    </button>
+  </div>
+
+  <!-- Intention Reduction Bar -->
+  <div class="reduction-section">
+    <div class="input-group">
+      <label for="sigilPhraseInput">Affirmation / Intention String to Encode</label>
+      <input 
+        id="sigilPhraseInput"
+        type="text" 
+        [(ngModel)]="seedPhraseInput" 
+        (ngModelChange)="onSeedPhraseChange()"
+        placeholder="e.g., UNSTOPPABLE CREATIVE MOMENTUM"
+        autocomplete="off"
+        spellcheck="false"
+      />
+    </div>
+
+    <!-- Austin Osman Spare Character Breakdown -->
+    <div class="reduction-strip">
+      <span class="strip-label">Hermetic Reduction:</span>
+      <div class="characters-list">
+        @for (char of uniqueCharacters; track $index) {
+          <span class="char-badge">{{ char }}</span>
+        }
+      </div>
+      <span class="seed-word-badge">
+        Sigil Root: <strong>{{ seedWord }}</strong>
+      </span>
+    </div>
+  </div>
+
+  <!-- Main Canvas and Controls Layout -->
+  <div class="canvas-controls-grid">
+    <!-- Interactive SVG Canvas Panel -->
+    <div class="svg-canvas-wrapper">
+      <svg 
+        id="sacredSigilSvgCanvas"
+        [attr.width]="sigilGeometry.canvasSize" 
+        [attr.height]="sigilGeometry.canvasSize" 
+        [attr.viewBox]="'0 0 ' + sigilGeometry.canvasSize + ' ' + sigilGeometry.canvasSize"
+        class="sigil-svg-element">
+        
+        <defs>
+          <filter id="sacralGlowFilter" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="3.5" result="blur"></feGaussianBlur>
+            <feMerge>
+              <feMergeNode in="blur"></feMergeNode>
+              <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+          </filter>
+
+          <linearGradient id="sacralVectorGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#ff9100"></stop>
+            <stop offset="50%" stop-color="#ffd600"></stop>
+            <stop offset="100%" stop-color="#ff6d00"></stop>
+          </linearGradient>
+        </defs>
+
+        <!-- Concentric Radial Rings -->
+        @for (ringRadius of sigilGeometry.concentricRings; track $index) {
+          <circle 
+            [attr.cx]="sigilGeometry.centerCoordinate" 
+            [attr.cy]="sigilGeometry.centerCoordinate" 
+            [attr.r]="ringRadius" 
+            fill="none" 
+            stroke="#ff9100" 
+            [attr.stroke-opacity]="0.22 - ($index * 0.04)"
+            [attr.stroke-dasharray]="$index % 2 === 0 ? '4 4' : null">
+          </circle>
+        }
+
+        <!-- Radial Rosette Geometry Elements -->
+        @for (ringRadius of sigilGeometry.concentricRings; track $index) {
+          <g>
+            @for (angle of sigilGeometry.symmetryAngles; track angle) {
+              <circle 
+                [attr.cx]="calculateRosetteX(sigilGeometry.centerCoordinate, ringRadius, angle)"
+                [attr.cy]="calculateRosetteY(sigilGeometry.centerCoordinate, ringRadius, angle)"
+                [attr.r]="ringRadius * 0.35"
+                fill="none"
+                stroke="#ffd600"
+                stroke-opacity="0.08">
+              </circle>
+            }
+          </g>
+        }
+
+        <!-- Radial Symmetrical Vector Lines -->
+        @for (angle of sigilGeometry.symmetryAngles; track angle) {
+          <g [attr.transform]="'rotate(' + angle + ' ' + sigilGeometry.centerCoordinate + ' ' + sigilGeometry.centerCoordinate + ')'">
+            <path 
+              [attr.d]="sigilGeometry.primarySvgPath" 
+              fill="none" 
+              stroke="url(#sacralVectorGradient)" 
+              [attr.stroke-width]="sigilConfig.strokeWidth"
+              stroke-linecap="round" 
+              stroke-linejoin="round"
+              [attr.filter]="sigilConfig.glow ? 'url(#sacralGlowFilter)' : null">
+            </path>
+
+            <!-- Node Points -->
+            @for (point of sigilGeometry.coordinatePoints; track $index) {
+              <circle 
+                [attr.cx]="point.x" 
+                [attr.cy]="point.y" 
+                [attr.r]="$index === 0 ? 3.5 : 2"
+                [attr.fill]="$index === 0 ? '#fff' : '#ff9100'">
+              </circle>
+            }
+          </g>
+        }
+
+        <!-- Center Anchor Core -->
+        <circle 
+          [attr.cx]="sigilGeometry.centerCoordinate" 
+          [attr.cy]="sigilGeometry.centerCoordinate" 
+          r="4.5" 
+          fill="#ffd600"
+          [attr.filter]="sigilConfig.glow ? 'url(#sacralGlowFilter)' : null">
+        </circle>
+      </svg>
+
+      <span class="canvas-caption">
+        Austin Osman Spare Letter Matrix ({{ sigilConfig.symmetry }}-Fold Radial Symmetry)
+      </span>
+    </div>
+
+    <!-- Parameter Controls Column -->
+    <div class="controls-column">
+      <div class="control-card">
+        <h4 class="control-section-heading">Geometry Parameters</h4>
+
+        <!-- Symmetry Preset Buttons -->
+        <div class="control-row">
+          <div class="label-row">
+            <span>Radial Symmetry</span>
+            <span class="value-highlight">{{ sigilConfig.symmetry }}-Fold</span>
+          </div>
+          <div class="symmetry-button-group">
+            @for (symOption of [3, 4, 6, 8, 12]; track symOption) {
+              <button 
+                type="button" 
+                class="btn-symmetry"
+                [class.selected]="sigilConfig.symmetry === symOption"
+                (click)="updateSymmetry(symOption)">
+                {{ symOption }}x
+              </button>
+            }
+          </div>
+        </div>
+
+        <!-- Concentric Ring Count Slider -->
+        <div class="control-row">
+          <div class="label-row">
+            <span>Concentric Rings</span>
+            <span class="value-highlight">{{ sigilConfig.ringCount }}</span>
+          </div>
+          <input 
+            type="range" 
+            min="2" 
+            max="5" 
+            [ngModel]="sigilConfig.ringCount"
+            (ngModelChange)="updateRings(+$event)"
+            class="range-slider"
+          />
+        </div>
+
+        <!-- Stroke Width Slider -->
+        <div class="control-row">
+          <div class="label-row">
+            <span>Stroke Weight</span>
+            <span class="value-highlight">{{ sigilConfig.strokeWidth }}px</span>
+          </div>
+          <input 
+            type="range" 
+            min="1" 
+            max="4" 
+            step="0.5"
+            [ngModel]="sigilConfig.strokeWidth"
+            (ngModelChange)="updateStrokeWidth(+$event)"
+            class="range-slider"
+          />
+        </div>
+
+        <!-- Glow Effect Toggle -->
+        <div class="control-row toggle-row">
+          <span>Aura Glow Filter</span>
+          <button 
+            type="button" 
+            class="btn-toggle-glow" 
+            [class.active]="sigilConfig.glow"
+            (click)="toggleGlow()">
+            {{ sigilConfig.glow ? 'Enabled' : 'Disabled' }}
+          </button>
+        </div>
+      </div>
+
+      <!-- Creative Flow Sprint Timer -->
+      <div class="timer-card">
+        <span class="timer-badge">Creative Flow Sprint</span>
+        <div class="timer-countdown">{{ formatTimerDisplay(secondsRemaining) }}</div>
+        
+        <div class="timer-actions">
+          <button 
+            type="button" 
+            class="btn-sprint-toggle"
+            [class.running]="isSprintActive"
+            (click)="toggleSprintTimer()">
+            {{ isSprintActive ? 'Pause Sprint' : 'Enter Sprint (417Hz)' }}
+          </button>
+          <button 
+            type="button" 
+            class="btn-sprint-reset" 
+            (click)="resetSprintTimer()"
+            title="Reset to 25 minutes">
+            ↺
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

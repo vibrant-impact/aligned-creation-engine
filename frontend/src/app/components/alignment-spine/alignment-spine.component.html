@@ -1,15 +1,63 @@
-<aside class="alignment-spine-panel">
-  <h3>Alignment Spine</h3>
+<aside class="alignment-spine-card">
+  <!-- Header -->
+  <div class="spine-header">
+    <div>
+      <h3 class="spine-title">Alignment Spine</h3>
+      <p class="spine-subtitle">Current of Manifestation</p>
+    </div>
+    <div class="flow-direction-pill">
+      <span class="flow-arrow">↓</span>
+      <span>Crown → Root</span>
+    </div>
+  </div>
+
+  <!-- Vertical Conduit & Node List -->
   <div class="spine-track">
-    <div class="spine-line"></div>
-    @for (node of chakraNodes; track node.key) {
-      <div 
-        class="spine-node {{ node.key }}" 
-        [class.active]="node.key === activeChakraKey" 
-        [title]="node.name">
-        <span>{{ node.symbol }}</span>
-        <p>{{ node.name }}</p>
-      </div>
+    <!-- Continuous Vertical Conduit Line -->
+    <div class="vertical-conduit-line"></div>
+
+    @for (chakra of chakras; track chakra.id) {
+      <button 
+        type="button" 
+        class="spine-node-btn"
+        [class.active]="activeChakraKey === chakra.id"
+        (click)="handleNodeClick(chakra.id)">
+        
+        <!-- Node Orb with Radiating Glow -->
+        <div class="node-orb-wrapper">
+          <div 
+            class="node-orb" 
+            [style.background-color]="chakra.colorHex"
+            [style.box-shadow]="activeChakraKey === chakra.id ? '0 0 16px ' + chakra.colorHex : 'none'">
+            <span class="orb-symbol">✧</span>
+          </div>
+          @if (activeChakraKey === chakra.id) {
+            <div class="pulse-ring" [style.border-color]="chakra.colorHex"></div>
+          }
+        </div>
+
+        <!-- Node Meta -->
+        <div class="node-details">
+          <div class="node-top-row">
+            <span class="node-name">{{ chakra.name }}</span>
+            <span class="node-freq">{{ chakra.frequencyHz }}Hz</span>
+          </div>
+          <div class="node-bottom-row">
+            <span class="node-theme">{{ chakra.sanskrit }}</span>
+            <span 
+              class="status-pill"
+              [class.active-pill]="activeChakraKey === chakra.id">
+              {{ activeChakraKey === chakra.id ? 'Focus' : 'Aligned' }}
+            </span>
+          </div>
+        </div>
+      </button>
     }
   </div>
+
+  <!-- Footer Note -->
+  <footer class="spine-footer">
+    <span class="footer-dot"></span>
+    <span>Subtle Intent → Physical Matter</span>
+  </footer>
 </aside>

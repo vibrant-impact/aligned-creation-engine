@@ -3,13 +3,16 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { AlignmentSpineComponent } from '../alignment-spine/alignment-spine.component';
+import { SacralWorkshopComponent } from '../sacral-workshop/sacral-workshop.component';
 import { IntentService, IntentionItem, ActionStep, BeliefTransformation } from '../../services/intent.service';
 import { AudioService } from '../../services/audio.service';
+import { CHAKRA_LIST, CHAKRA_DICTIONARY } from '../../utils/chakras.data';
+import { ChakraIdentifier, ChakraMetadata } from '../../models/manifestation.model';
 
 @Component({
   selector: 'app-workshop',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink, AlignmentSpineComponent],
+  imports: [CommonModule, FormsModule, RouterLink, AlignmentSpineComponent, SacralWorkshopComponent],
   templateUrl: './workshop.component.html',
   styleUrl: './workshop.component.css'
 })
@@ -17,21 +20,26 @@ export class WorkshopComponent implements OnInit {
   public intentId: string | null = null;
   public currentIntent: IntentionItem | undefined;
   
-  // Action Matrix state
+  // Navigation Tabs State
+  public readonly chakraTabs: ChakraMetadata[] = CHAKRA_LIST;
+  public readonly chakraDictionary = CHAKRA_DICTIONARY;
+  public activeChakraId: ChakraIdentifier = 'solarPlexus';
+
+  // Action Matrix state (Solar Plexus)
   public actionSteps: ActionStep[] = [];
   public newActionTitle: string = '';
   public isAddingAction: boolean = false;
 
-  // Belief Breaker state
+  // Belief Breaker state (Solar Plexus)
   public limitingBeliefInput: string = '';
   public isReframing: boolean = false;
   public beliefTransformations: BeliefTransformation[] = [];
 
   constructor(
-  private readonly route: ActivatedRoute,
-  private readonly intentService: IntentService,
-  private readonly audioService: AudioService
-) {}
+    private readonly route: ActivatedRoute,
+    private readonly intentService: IntentService,
+    private readonly audioService: AudioService
+  ) {}
 
   public ngOnInit(): void {
     this.intentId = this.route.snapshot.paramMap.get('id');
@@ -46,6 +54,19 @@ export class WorkshopComponent implements OnInit {
       this.loadActionSteps();
       this.loadBeliefTransformations();
     }
+  }
+
+  public selectChakra(id: ChakraIdentifier): void {
+    this.activeChakraId = id;
+    // Play subtle Solfeggio chime on transition
+    const chakra = this.chakraDictionary[id];
+    if (chakra) {
+      this.audioService.playAlignmentChime(chakra.frequencyHz);
+    }
+  }
+
+  public get currentChakra(): ChakraMetadata {
+    return this.chakraDictionary[this.activeChakraId];
   }
 
   public get completedCount(): number {
@@ -150,7 +171,6 @@ export class WorkshopComponent implements OnInit {
       error: (error) => {
         this.isReframing = false;
         console.error('Reframing failed:', error);
-        alert('Could not reframe belief. Check server logs.');
       }
     });
   }

@@ -1,12 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-export interface ChakraNode {
-  key: string;
-  name: string;
-  symbol: string;
-  status: 'aligned' | 'active' | 'dormant';
-}
+import { CHAKRA_LIST } from '../../utils/chakras.data';
+import { ChakraIdentifier, ChakraMetadata } from '../../models/manifestation.model';
 
 @Component({
   selector: 'app-alignment-spine',
@@ -16,15 +11,12 @@ export interface ChakraNode {
   styleUrl: './alignment-spine.component.css'
 })
 export class AlignmentSpineComponent {
-  @Input() public activeChakraKey: string = 'solar_plexus';
+  @Input() public activeChakraKey: ChakraIdentifier = 'solarPlexus';
+  @Output() public chakraSelected = new EventEmitter<ChakraIdentifier>();
 
-  public readonly chakraNodes: ChakraNode[] = [
-    { key: 'crown', name: 'Crown', symbol: '👑', status: 'dormant' },
-    { key: 'third_eye', name: 'Third Eye', symbol: '👁️', status: 'dormant' },
-    { key: 'throat', name: 'Throat', symbol: '🗣️', status: 'dormant' },
-    { key: 'heart', name: 'Heart', symbol: '💚', status: 'dormant' },
-    { key: 'solar_plexus', name: 'Solar Plexus', symbol: '☀️', status: 'active' },
-    { key: 'sacral', name: 'Sacral', symbol: '🎨', status: 'dormant' },
-    { key: 'root', name: 'Root', symbol: '🌍', status: 'dormant' }
-  ];
+  public readonly chakras: ChakraMetadata[] = CHAKRA_LIST;
+
+  public handleNodeClick(chakraId: ChakraIdentifier): void {
+    this.chakraSelected.emit(chakraId);
+  }
 }

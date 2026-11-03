@@ -1,116 +1,183 @@
 <div class="workshop-layout">
   <div class="workshop-main">
+    <!-- Top Breadcrumb & Titles -->
     <div class="workshop-header">
-      <a routerLink="/dashboard" class="back-link">← Return to Dashboard</a>
+      <div class="breadcrumb-row">
+        <a routerLink="/dashboard" class="back-link">← Return to Dashboard</a>
+        <span class="breadcrumb-separator">></span>
+        <span class="active-stage-label">{{ currentChakra.name }} Workshop</span>
+      </div>
+
       <div class="header-titles">
         <h2>{{ currentIntent ? currentIntent.title : 'Intention Workshop' }}</h2>
-        <span class="category-pill">{{ currentIntent ? currentIntent.category : 'General' }}</span>
+        <span class="chakra-pill-badge" [style.border-color]="currentChakra.colorHex" [style.color]="currentChakra.colorHex">
+          {{ currentChakra.name }} ({{ currentChakra.sanskrit }})
+        </span>
       </div>
-      <p class="workshop-subtitle">
-        Focus Stage: <strong>Solar Plexus (Will, Power & Execution)</strong>
-      </p>
     </div>
 
-    <!-- Limiting-Belief Breaker AI Tool -->
-    <section class="workspace-area">
-      <div class="belief-card">
-        <div class="belief-card-header">
-          <div>
-            <h3>Solar Plexus Belief Alchemist</h3>
-            <p class="section-tagline">Transmute subconscious doubt and hesitation into sovereign will.</p>
-          </div>
-          <span class="alchemist-badge">AI Powered</span>
-        </div>
+    <!-- Horizontal Chakra Selector Tabs -->
+    <nav class="chakra-tabs-nav" aria-label="Chakra Workshops">
+      @for (tab of chakraTabs; track tab.id) {
+        <button 
+          type="button"
+          class="chakra-tab-btn"
+          [class.active]="activeChakraId === tab.id"
+          (click)="selectChakra(tab.id)">
+          <span class="tab-dot" [style.background-color]="tab.colorHex"></span>
+          <span class="tab-name">{{ tab.name }}</span>
+          <span class="tab-status-icon">✓</span>
+        </button>
+      }
+    </nav>
 
-        <form class="belief-form" (ngSubmit)="handleReframeBelief()">
-          <textarea
-            [(ngModel)]="limitingBeliefInput"
-            name="limitingBeliefInput"
-            placeholder="Name your hesitation or limiting belief (e.g., 'I lack the experience to compete with senior developers')..."
-            rows="3"
-            required></textarea>
-          <div class="belief-form-footer">
-            <button type="submit" class="btn-alchemize" [disabled]="isReframing">
-              {{ isReframing ? 'Transmuting Friction...' : '⚡ Alchemize Belief' }}
-            </button>
-          </div>
-        </form>
-
-        <!-- Transformed Belief Feed -->
-        @if (beliefTransformations.length > 0) {
-          <div class="transformations-container">
-            @for (item of beliefTransformations; track item.id) {
-              <div class="transformation-card">
-                <div class="transmuted-header">
-                  <span class="doubt-label">Limiting Thought:</span>
-                  <p class="doubt-text">"{{ item.limitingBelief }}"</p>
-                </div>
-                <div class="transmuted-body">
-                  <span class="affirmation-label">Sovereign Affirmation:</span>
-                  <p class="affirmation-text">{{ item.reframedAffirmation }}</p>
-                </div>
-                <div class="anchor-footer">
-                  <span class="anchor-label">Action Anchor:</span>
-                  <span class="anchor-text">{{ item.actionAnchor }}</span>
-                  <button type="button" class="btn-adopt-anchor" (click)="adoptAnchorAsAction(item.actionAnchor)">
-                    + Add to Action Matrix
-                  </button>
-                </div>
-              </div>
-            }
-          </div>
-        }
+    <!-- Active Chakra Hero Banner -->
+    <header class="chakra-stage-hero" [style.border-color]="currentChakra.colorHex + '40'">
+      <div>
+        <span class="hero-stage-meta" [style.color]="currentChakra.colorHex">
+          CHAKRA {{ currentChakra.index }} OF 7 • {{ currentChakra.sanskrit }} • {{ currentChakra.frequencyHz }} Hz
+        </span>
+        <h3 class="hero-stage-title">{{ currentChakra.theme }}</h3>
+        <p class="hero-stage-desc">{{ currentChakra.title }}</p>
       </div>
-    </section>
 
-    <!-- Solar Plexus Action Workspace -->
-    <section class="workspace-area">
-      <div class="action-card">
-        <div class="action-card-header">
-          <div>
-            <h3>Micro-Action Execution Matrix</h3>
-            <p class="section-tagline">Anchor mental intention into concrete kinetic motion.</p>
+      <div class="seed-mantra-box">
+        <span class="mantra-label">Seed Mantra</span>
+        <span class="mantra-value">{{ currentChakra.seedMantra }}</span>
+      </div>
+    </header>
+
+    <!-- ============================================== -->
+    <!-- CHAKRA 3: SOLAR PLEXUS WORKSHOP               -->
+    <!-- ============================================== -->
+    @if (activeChakraId === 'solarPlexus') {
+      <!-- Limiting-Belief Breaker AI Tool -->
+      <section class="workspace-area">
+        <div class="belief-card">
+          <div class="belief-card-header">
+            <div>
+              <h3>Solar Plexus Belief Alchemist</h3>
+              <p class="section-tagline">Transmute subconscious doubt and hesitation into sovereign will.</p>
+            </div>
+            <span class="alchemist-badge">AI Powered</span>
           </div>
-          <div class="completion-badge">
-            {{ completedCount }} / {{ actionSteps.length }} Aligned ({{ completionPercentage }}%)
-          </div>
-        </div>
 
-        <div class="action-progress-track">
-          <div class="action-progress-bar" [style.width.%]="completionPercentage"></div>
-        </div>
+          <form class="belief-form" (ngSubmit)="handleReframeBelief()">
+            <textarea
+              [(ngModel)]="limitingBeliefInput"
+              name="limitingBeliefInput"
+              placeholder="Name your hesitation or limiting belief (e.g., 'I lack the experience to compete with senior developers')..."
+              rows="3"
+              required></textarea>
+            <div class="belief-form-footer">
+              <button type="submit" class="btn-alchemize" [disabled]="isReframing">
+                {{ isReframing ? 'Transmuting Friction...' : '⚡ Alchemize Belief' }}
+              </button>
+            </div>
+          </form>
 
-        <form class="action-input-form" (ngSubmit)="handleAddAction()">
-          <input 
-            type="text" 
-            [(ngModel)]="newActionTitle" 
-            name="newActionTitle" 
-            placeholder="Commit to a specific micro-step..." 
-            required 
-            autocomplete="off"
-          />
-          <button type="submit" class="btn-action-add" [disabled]="isAddingAction">
-            {{ isAddingAction ? 'Adding...' : '+ Add Step' }}
-          </button>
-        </form>
-
-        <ul class="action-list">
-          @for (step of actionSteps; track step.id) {
-            <li class="action-item" [class.completed]="step.isCompleted" (click)="handleToggleAction(step)">
-              <div class="checkbox-indicator">
-                @if (step.isCompleted) {
-                  <span>✓</span>
-                }
-              </div>
-              <span class="action-title">{{ step.title }}</span>
-            </li>
-          } @empty {
-            <li class="empty-state">No micro-steps defined yet. Add your first step above or adopt one from the Alchemist.</li>
+          @if (beliefTransformations.length > 0) {
+            <div class="transformations-container">
+              @for (item of beliefTransformations; track item.id) {
+                <div class="transformation-card">
+                  <div class="transmuted-header">
+                    <span class="doubt-label">Limiting Thought:</span>
+                    <p class="doubt-text">"{{ item.limitingBelief }}"</p>
+                  </div>
+                  <div class="transmuted-body">
+                    <span class="affirmation-label">Sovereign Affirmation:</span>
+                    <p class="affirmation-text">{{ item.reframedAffirmation }}</p>
+                  </div>
+                  <div class="anchor-footer">
+                    <span class="anchor-label">Action Anchor:</span>
+                    <span class="anchor-text">{{ item.actionAnchor }}</span>
+                    <button type="button" class="btn-adopt-anchor" (click)="adoptAnchorAsAction(item.actionAnchor)">
+                      + Add to Action Matrix
+                    </button>
+                  </div>
+                </div>
+              }
+            </div>
           }
-        </ul>
-      </div>
-    </section>
+        </div>
+      </section>
+
+      <!-- Solar Plexus Action Workspace -->
+      <section class="workspace-area">
+        <div class="action-card">
+          <div class="action-card-header">
+            <div>
+              <h3>Micro-Action Execution Matrix</h3>
+              <p class="section-tagline">Anchor mental intention into concrete kinetic motion.</p>
+            </div>
+            <div class="completion-badge">
+              {{ completedCount }} / {{ actionSteps.length }} Aligned ({{ completionPercentage }}%)
+            </div>
+          </div>
+
+          <div class="action-progress-track">
+            <div class="action-progress-bar" [style.width.%]="completionPercentage"></div>
+          </div>
+
+          <form class="action-input-form" (ngSubmit)="handleAddAction()">
+            <input 
+              type="text" 
+              [(ngModel)]="newActionTitle" 
+              name="newActionTitle" 
+              placeholder="Commit to a specific micro-step..." 
+              required 
+              autocomplete="off"
+            />
+            <button type="submit" class="btn-action-add" [disabled]="isAddingAction">
+              {{ isAddingAction ? 'Adding...' : '+ Add Step' }}
+            </button>
+          </form>
+
+          <ul class="action-list">
+            @for (step of actionSteps; track step.id) {
+              <li class="action-item" [class.completed]="step.isCompleted" (click)="handleToggleAction(step)">
+                <div class="checkbox-indicator">
+                  @if (step.isCompleted) {
+                    <span>✓</span>
+                  }
+                </div>
+                <span class="action-title">{{ step.title }}</span>
+              </li>
+            } @empty {
+              <li class="empty-state">No micro-steps defined yet. Add your first step above or adopt one from the Alchemist.</li>
+            }
+          </ul>
+        </div>
+      </section>
+    }
+
+    <!-- ============================================== -->
+    <!-- CHAKRA 2: SACRAL SIGIL STUDIO                  -->
+    <!-- ============================================== -->
+    @if (activeChakraId === 'sacral') {
+      <app-sacral-workshop 
+        [intentionTitle]="currentIntent ? currentIntent.title : 'CREATIVE FLOW'">
+      </app-sacral-workshop>
+    }
+
+    <!-- ============================================== -->
+    <!-- OTHER CHAKRAS: WORKSPACE PLACEHOLDER           -->
+    <!-- ============================================== -->
+    @if (activeChakraId !== 'solarPlexus' && activeChakraId !== 'sacral') {
+      <section class="workspace-area">
+        <div class="placeholder-card" [style.border-color]="currentChakra.colorHex + '40'">
+          <h3 [style.color]="currentChakra.colorHex">{{ currentChakra.name }} Studio In Development</h3>
+          <p>The catalytic workshop for {{ currentChakra.title }} is queued next.</p>
+          <p class="hint">Switch to <strong>Solar Plexus</strong> for the Action Matrix & Belief Alchemist, or <strong>Sacral</strong> for the Algorithmic Sigil Studio.</p>
+        </div>
+      </section>
+    }
+
   </div>
 
-  <app-alignment-spine [activeChakraKey]="'solar_plexus'"></app-alignment-spine>
+  <!-- Right Persistent Alignment Spine -->
+  <app-alignment-spine 
+    [activeChakraKey]="activeChakraId"
+    (chakraSelected)="selectChakra($event)">
+  </app-alignment-spine>
 </div>
