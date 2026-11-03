@@ -3,75 +3,186 @@
 }
 
 .sacral-studio-container {
-  background: rgba(18, 11, 28, 0.85);
-  border: 1px solid rgba(255, 145, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* 1. Diagnostic Card */
+.diagnostic-card {
+  background: rgba(15, 19, 32, 0.85);
+  border: 1px solid rgba(255, 145, 0, 0.25);
   border-radius: 16px;
-  padding: 28px;
+  padding: 20px 24px;
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   display: flex;
   flex-direction: column;
-  gap: 22px;
-  box-shadow: 0 4px 25px rgba(255, 145, 0, 0.08);
+  gap: 12px;
 }
 
-.studio-header {
+.diagnostic-header {
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  align-items: flex-start;
-  gap: 16px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  padding-bottom: 16px;
 }
 
-.chakra-stage-badge {
-  font-family: 'JetBrains Mono', monospace;
+.diagnostic-title-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.diagnostic-orb {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background-color: #ff9100;
+  box-shadow: 0 0 10px #ff9100;
+}
+
+.diagnostic-heading {
   font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
-  color: #ff9100;
   letter-spacing: 0.5px;
-  display: block;
-  margin-bottom: 4px;
-}
-
-.studio-title {
-  font-size: 1.35rem;
-  color: #f8fafc;
+  color: #ff9100;
   margin: 0;
 }
 
-.studio-subtitle {
+.diagnostic-score-badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  color: #ff9100;
+  background: rgba(255, 145, 0, 0.15);
+  border: 1px solid rgba(255, 145, 0, 0.35);
+  padding: 3px 10px;
+  border-radius: 12px;
+}
+
+.diagnostic-prompt {
   font-size: 0.85rem;
-  color: #94a3b8;
-  margin-top: 4px;
+  color: #cbd5e1;
+  margin: 0;
+}
+
+.diagnostic-slider {
+  accent-color: #ff9100;
+  cursor: pointer;
+  width: 100%;
+}
+
+.slider-scale-labels {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: #64748b;
+}
+
+/* 2. Tool Card */
+.sacral-tool-card {
+  background: rgba(15, 19, 32, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 24px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.card-header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 14px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.header-with-icon {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.header-with-icon h4 {
+  font-size: 1.1rem;
+  color: #ffffff;
+  margin: 0;
+}
+
+.header-icon {
+  width: 18px;
+  height: 18px;
+  color: #ff9100;
+}
+
+.actions-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-sacral-tone {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 145, 0, 0.15);
+  border: 1px solid rgba(255, 145, 0, 0.4);
+  color: #ffb74d;
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-sacral-tone:hover {
+  background: rgba(255, 145, 0, 0.28);
+  box-shadow: 0 0 10px rgba(255, 145, 0, 0.3);
+  color: #ffffff;
+}
+
+.btn-sacral-tone.active {
+  background: #ff9100;
+  color: #0c0702;
+  border-color: #ff9100;
+  box-shadow: 0 0 12px rgba(255, 145, 0, 0.5);
+}
+
+.btn-icon {
+  font-size: 12px;
 }
 
 .btn-export-svg {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   background: rgba(255, 145, 0, 0.15);
-  border: 1px solid rgba(255, 145, 0, 0.45);
+  border: 1px solid rgba(255, 145, 0, 0.4);
   color: #ff9100;
-  padding: 8px 16px;
-  border-radius: 10px;
-  font-size: 0.8rem;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.75rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
-  flex-shrink: 0;
 }
 
 .btn-export-svg:hover {
   background: rgba(255, 145, 0, 0.25);
   border-color: #ff9100;
-  box-shadow: 0 0 12px rgba(255, 145, 0, 0.35);
 }
 
-.btn-icon {
-  width: 14px;
-  height: 14px;
+.btn-export-icon {
+  width: 13px;
+  height: 13px;
 }
 
 /* Reduction Inputs */
@@ -88,30 +199,29 @@
 }
 
 .input-group label {
-  font-size: 0.8rem;
-  font-weight: 600;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
   text-transform: uppercase;
-  color: #cbd5e1;
+  color: #ff9100;
   letter-spacing: 0.5px;
 }
 
 .input-group input {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(0, 0, 0, 0.35);
   border: 1px solid rgba(255, 145, 0, 0.3);
   color: #ff9100;
-  padding: 12px 16px;
-  border-radius: 10px;
+  padding: 10px 14px;
+  border-radius: 8px;
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.95rem;
   font-weight: 600;
   letter-spacing: 1px;
   outline: none;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .input-group input:focus {
   border-color: #ff9100;
-  box-shadow: 0 0 12px rgba(255, 145, 0, 0.3);
 }
 
 .reduction-strip {
@@ -121,7 +231,7 @@
   gap: 8px;
   background: rgba(255, 145, 0, 0.08);
   border: 1px solid rgba(255, 145, 0, 0.2);
-  padding: 8px 14px;
+  padding: 8px 12px;
   border-radius: 8px;
 }
 
@@ -139,8 +249,8 @@
 }
 
 .char-badge {
-  width: 22px;
-  height: 22px;
+  width: 20px;
+  height: 20px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -148,7 +258,7 @@
   border: 1px solid rgba(255, 145, 0, 0.45);
   color: #ffb74d;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 700;
   border-radius: 4px;
 }
@@ -168,20 +278,19 @@
 .canvas-controls-grid {
   display: grid;
   grid-template-columns: 1.15fr 0.85fr;
-  gap: 24px;
+  gap: 20px;
   align-items: center;
 }
 
 .svg-canvas-wrapper {
   background: radial-gradient(circle at center, #1b0f05 0%, #0c0702 100%);
   border: 1px solid rgba(255, 145, 0, 0.3);
-  border-radius: 16px;
-  padding: 20px;
+  border-radius: 14px;
+  padding: 16px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  box-shadow: inset 0 0 25px rgba(255, 145, 0, 0.08);
 }
 
 .sigil-svg-element {
@@ -194,25 +303,25 @@
   font-family: 'JetBrains Mono', monospace;
   font-size: 10px;
   color: #ff9100;
-  margin-top: 10px;
+  margin-top: 8px;
   opacity: 0.8;
 }
 
-/* Control Cards */
+/* Controls Column */
 .controls-column {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 14px;
 }
 
 .control-card {
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 14px;
-  padding: 16px;
+  border-radius: 12px;
+  padding: 14px;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 12px;
 }
 
 .control-section-heading {
@@ -305,12 +414,12 @@
 .timer-card {
   background: rgba(255, 145, 0, 0.08);
   border: 1px solid rgba(255, 145, 0, 0.3);
-  border-radius: 14px;
-  padding: 16px;
+  border-radius: 12px;
+  padding: 14px;
   text-align: center;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
 }
 
 .timer-badge {
@@ -324,7 +433,7 @@
 
 .timer-countdown {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   font-weight: 800;
   color: #ffffff;
 }
@@ -341,11 +450,10 @@
   color: #0c0702;
   border: none;
   border-radius: 8px;
-  padding: 8px 16px;
+  padding: 6px 14px;
   font-weight: 700;
   font-size: 0.8rem;
   cursor: pointer;
-  transition: opacity 0.2s ease;
 }
 
 .btn-sprint-toggle.running {
@@ -358,10 +466,91 @@
   border: 1px solid rgba(255, 255, 255, 0.1);
   color: #cbd5e1;
   border-radius: 8px;
-  padding: 8px 12px;
-  font-size: 1rem;
+  padding: 6px 10px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+/* 3. Checklist Card */
+.checklist-card {
+  background: rgba(15, 19, 32, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 20px 24px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.checklist-heading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #f1f5f9;
+  margin: 0;
+}
+
+.shield-icon {
+  font-size: 12px;
+}
+
+.checklist-items {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.check-item-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+  padding: 10px 14px;
   cursor: pointer;
   transition: all 0.2s ease;
+}
+
+.check-item-row:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 145, 0, 0.3);
+}
+
+.check-box-indicator {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  border: 1px solid #64748b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: #080a14;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.check-item-row.completed .check-box-indicator {
+  background-color: #ff9100;
+  border-color: #ff9100;
+}
+
+.task-label {
+  font-size: 0.85rem;
+  color: #e2e8f0;
+}
+
+.check-item-row.completed .task-label {
+  text-decoration: line-through;
+  color: #64748b;
 }
 
 @media (max-width: 860px) {

@@ -5,23 +5,42 @@
         <h2>My Intentions & Project Alignment</h2>
         <p class="subtitle">Systematically bring your vision into reality through the 7-stage current.</p>
       </div>
-      <button class="btn-primary" (click)="openModal()">+ Add New Goal / Intent</button>
+      <button type="button" class="btn-primary" (click)="openModal()">+ Add New Goal / Intent</button>
     </div>
 
     <div class="intent-cards-grid">
       @for (intent of (intentions$ | async); track intent.id) {
         <article class="intent-card">
           <div class="card-top">
-            <h3>{{ intent.title }}</h3>
-            <span class="category-tag">{{ intent.category }}</span>
+            <div class="card-title-group">
+              <h3>{{ intent.title }}</h3>
+              <span class="category-tag">{{ intent.category }}</span>
+            </div>
+
+            <button 
+              type="button" 
+              class="btn-delete-card" 
+              [disabled]="deletingIntentionId === intent.id"
+              (click)="handleDeleteIntention($event, intent)"
+              title="Dissolve Intention">
+              <svg class="delete-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="3 6 5 6 21 6"></polyline>
+                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                <line x1="10" y1="11" x2="10" y2="17"></line>
+                <line x1="14" y1="11" x2="14" y2="17"></line>
+              </svg>
+            </button>
           </div>
+
           <p class="status-text">
             Status: <strong>{{ intent.alignedNodes }}/{{ intent.totalNodes }} Aligned</strong> ({{ intent.progressPercentage }}%)
           </p>
+
           <div class="progress-track">
             <div class="progress-bar" [style.width.%]="intent.progressPercentage"></div>
           </div>
-          <button class="btn-primary open-workshop-btn" (click)="navigateToWorkshop(intent.id)">
+
+          <button type="button" class="btn-primary open-workshop-btn" (click)="navigateToWorkshop(intent.id)">
             Open Workshop
           </button>
         </article>
@@ -29,7 +48,7 @@
     </div>
   </section>
 
-  <app-alignment-spine [activeChakraKey]="'solar_plexus'"></app-alignment-spine>
+  <app-alignment-spine [activeChakraKey]="'solarPlexus'"></app-alignment-spine>
 </main>
 
 <app-goal-modal [isOpen]="isGoalModalOpen" (closeModal)="closeModal()"></app-goal-modal>

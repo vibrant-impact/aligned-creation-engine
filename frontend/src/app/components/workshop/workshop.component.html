@@ -10,7 +10,10 @@
 
       <div class="header-titles">
         <h2>{{ currentIntent ? currentIntent.title : 'Intention Workshop' }}</h2>
-        <span class="chakra-pill-badge" [style.border-color]="currentChakra.colorHex" [style.color]="currentChakra.colorHex">
+        <span 
+          class="chakra-pill-badge" 
+          [style.border-color]="currentChakra.colorHex" 
+          [style.color]="currentChakra.colorHex">
           {{ currentChakra.name }} ({{ currentChakra.sanskrit }})
         </span>
       </div>
@@ -48,111 +51,53 @@
     </header>
 
     <!-- ============================================== -->
-    <!-- CHAKRA 3: SOLAR PLEXUS WORKSHOP               -->
+    <!-- CHAKRA 7: CROWN WORKSHOP (Sahasrara)           -->
     <!-- ============================================== -->
-    @if (activeChakraId === 'solarPlexus') {
-      <!-- Limiting-Belief Breaker AI Tool -->
-      <section class="workspace-area">
-        <div class="belief-card">
-          <div class="belief-card-header">
-            <div>
-              <h3>Solar Plexus Belief Alchemist</h3>
-              <p class="section-tagline">Transmute subconscious doubt and hesitation into sovereign will.</p>
-            </div>
-            <span class="alchemist-badge">AI Powered</span>
-          </div>
-
-          <form class="belief-form" (ngSubmit)="handleReframeBelief()">
-            <textarea
-              [(ngModel)]="limitingBeliefInput"
-              name="limitingBeliefInput"
-              placeholder="Name your hesitation or limiting belief (e.g., 'I lack the experience to compete with senior developers')..."
-              rows="3"
-              required></textarea>
-            <div class="belief-form-footer">
-              <button type="submit" class="btn-alchemize" [disabled]="isReframing">
-                {{ isReframing ? 'Transmuting Friction...' : '⚡ Alchemize Belief' }}
-              </button>
-            </div>
-          </form>
-
-          @if (beliefTransformations.length > 0) {
-            <div class="transformations-container">
-              @for (item of beliefTransformations; track item.id) {
-                <div class="transformation-card">
-                  <div class="transmuted-header">
-                    <span class="doubt-label">Limiting Thought:</span>
-                    <p class="doubt-text">"{{ item.limitingBelief }}"</p>
-                  </div>
-                  <div class="transmuted-body">
-                    <span class="affirmation-label">Sovereign Affirmation:</span>
-                    <p class="affirmation-text">{{ item.reframedAffirmation }}</p>
-                  </div>
-                  <div class="anchor-footer">
-                    <span class="anchor-label">Action Anchor:</span>
-                    <span class="anchor-text">{{ item.actionAnchor }}</span>
-                    <button type="button" class="btn-adopt-anchor" (click)="adoptAnchorAsAction(item.actionAnchor)">
-                      + Add to Action Matrix
-                    </button>
-                  </div>
-                </div>
-              }
-            </div>
-          }
-        </div>
-      </section>
-
-      <!-- Solar Plexus Action Workspace -->
-      <section class="workspace-area">
-        <div class="action-card">
-          <div class="action-card-header">
-            <div>
-              <h3>Micro-Action Execution Matrix</h3>
-              <p class="section-tagline">Anchor mental intention into concrete kinetic motion.</p>
-            </div>
-            <div class="completion-badge">
-              {{ completedCount }} / {{ actionSteps.length }} Aligned ({{ completionPercentage }}%)
-            </div>
-          </div>
-
-          <div class="action-progress-track">
-            <div class="action-progress-bar" [style.width.%]="completionPercentage"></div>
-          </div>
-
-          <form class="action-input-form" (ngSubmit)="handleAddAction()">
-            <input 
-              type="text" 
-              [(ngModel)]="newActionTitle" 
-              name="newActionTitle" 
-              placeholder="Commit to a specific micro-step..." 
-              required 
-              autocomplete="off"
-            />
-            <button type="submit" class="btn-action-add" [disabled]="isAddingAction">
-              {{ isAddingAction ? 'Adding...' : '+ Add Step' }}
-            </button>
-          </form>
-
-          <ul class="action-list">
-            @for (step of actionSteps; track step.id) {
-              <li class="action-item" [class.completed]="step.isCompleted" (click)="handleToggleAction(step)">
-                <div class="checkbox-indicator">
-                  @if (step.isCompleted) {
-                    <span>✓</span>
-                  }
-                </div>
-                <span class="action-title">{{ step.title }}</span>
-              </li>
-            } @empty {
-              <li class="empty-state">No micro-steps defined yet. Add your first step above or adopt one from the Alchemist.</li>
-            }
-          </ul>
-        </div>
-      </section>
+    @if (activeChakraId === 'crown') {
+      <app-crown-workshop
+        [intentionTitle]="currentIntent ? currentIntent.title : 'Current Intention'">
+      </app-crown-workshop>
     }
 
     <!-- ============================================== -->
-    <!-- CHAKRA 2: SACRAL SIGIL STUDIO                  -->
+    <!-- CHAKRA 6: THIRD EYE WORKSHOP (Ajna)            -->
+    <!-- ============================================== -->
+    @if (activeChakraId === 'thirdEye') {
+      <app-third-eye-workshop
+        [intentionTitle]="currentIntent ? currentIntent.title : 'Current Intention'">
+      </app-third-eye-workshop>
+    }
+
+    <!-- ============================================== -->
+    <!-- CHAKRA 5: THROAT WORKSHOP (Vishuddha)          -->
+    <!-- ============================================== -->
+    @if (activeChakraId === 'throat') {
+      <app-throat-workshop
+        [intentionTitle]="currentIntent ? currentIntent.title : 'Current Intention'">
+      </app-throat-workshop>
+    }
+
+    <!-- ============================================== -->
+    <!-- CHAKRA 4: HEART WORKSHOP (Anahata)             -->
+    <!-- ============================================== -->
+    @if (activeChakraId === 'heart') {
+      <app-heart-workshop
+        [intentionTitle]="currentIntent ? currentIntent.title : 'Current Intention'">
+      </app-heart-workshop>
+    }
+
+    <!-- ============================================== -->
+    <!-- CHAKRA 3: SOLAR PLEXUS WORKSHOP (Manipura)     -->
+    <!-- ============================================== -->
+    @if (activeChakraId === 'solarPlexus') {
+      <app-solar-plexus-workshop
+        [intentionId]="intentId"
+        [intentionTitle]="currentIntent ? currentIntent.title : 'Current Intention'">
+      </app-solar-plexus-workshop>
+    }
+
+    <!-- ============================================== -->
+    <!-- CHAKRA 2: SACRAL WORKSHOP (Svadhisthana)       -->
     <!-- ============================================== -->
     @if (activeChakraId === 'sacral') {
       <app-sacral-workshop 
@@ -161,16 +106,12 @@
     }
 
     <!-- ============================================== -->
-    <!-- OTHER CHAKRAS: WORKSPACE PLACEHOLDER           -->
+    <!-- CHAKRA 1: ROOT WORKSHOP (Muladhara)            -->
     <!-- ============================================== -->
-    @if (activeChakraId !== 'solarPlexus' && activeChakraId !== 'sacral') {
-      <section class="workspace-area">
-        <div class="placeholder-card" [style.border-color]="currentChakra.colorHex + '40'">
-          <h3 [style.color]="currentChakra.colorHex">{{ currentChakra.name }} Studio In Development</h3>
-          <p>The catalytic workshop for {{ currentChakra.title }} is queued next.</p>
-          <p class="hint">Switch to <strong>Solar Plexus</strong> for the Action Matrix & Belief Alchemist, or <strong>Sacral</strong> for the Algorithmic Sigil Studio.</p>
-        </div>
-      </section>
+    @if (activeChakraId === 'root') {
+      <app-root-workshop
+        [intentionTitle]="currentIntent ? currentIntent.title : 'Current Intention'">
+      </app-root-workshop>
     }
 
   </div>

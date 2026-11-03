@@ -1,0 +1,117 @@
+<section class="crown-studio-container">
+  <!-- 1. Assessment Diagnostic -->
+  <div class="diagnostic-card">
+    <div class="diagnostic-header">
+      <div class="diagnostic-title-group">
+        <span class="diagnostic-orb"></span>
+        <h4 class="diagnostic-heading">1. Assessment Diagnostic: Purpose & Divine Alignment</h4>
+      </div>
+      <span class="diagnostic-score-badge">{{ diagnosticScore }}/10 Alignment</span>
+    </div>
+    <p class="diagnostic-prompt">
+      How clear is your higher spiritual "Why" and connection to this intention's ultimate purpose beyond immediate ego gratification?
+    </p>
+    <input 
+      type="range" 
+      min="1" 
+      max="10" 
+      [(ngModel)]="diagnosticScore" 
+      class="diagnostic-slider"
+    />
+    <div class="slider-scale-labels">
+      <span>1 - Vague Ego Want</span>
+      <span>5 - Clear Purpose</span>
+      <span>10 - Transcendent Soul Mandate</span>
+    </div>
+  </div>
+
+  <!-- 2. Catalytic Tool: Divine Blueprint & Purpose Matrix -->
+  <div class="crown-tool-card">
+    <div class="card-header-bar">
+      <div class="header-with-icon">
+        <svg class="header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+        </svg>
+        <h4>2. Catalytic Tool: Core Mission & Alignment Clarifier</h4>
+      </div>
+      <div class="actions-group">
+        <button 
+          type="button" 
+          class="btn-crown-action" 
+          (click)="speakAnchorPhrase()"
+          title="Speak anchor declaration aloud">
+          <svg class="btn-action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path>
+            <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+            <line x1="12" y1="19" x2="12" y2="22"></line>
+          </svg>
+          <span>Speak Anchor</span>
+        </button>
+        <button 
+          type="button" 
+          class="btn-crown-action"
+          [class.active]="audioService.isPlaying && audioService.currentCarrierFrequency === 963"
+          (click)="audioService.isPlaying ? stopCrownTone() : playCrownTone()">
+          <span class="btn-action-icon">✧</span>
+          <span>{{ audioService.isPlaying && audioService.currentCarrierFrequency === 963 ? 'Stop 963Hz' : '963Hz Tone' }}</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Core Purpose Fields -->
+    <div class="fields-stack">
+      <!-- Mission Statement -->
+      <div class="field-box">
+        <label for="missionStatementInput">Core Mission Statement</label>
+        <textarea 
+          id="missionStatementInput"
+          rows="3" 
+          [(ngModel)]="crownData.missionStatement" 
+          placeholder="State the sovereign purpose of this creation..."></textarea>
+      </div>
+
+      <!-- Higher Why -->
+      <div class="field-box">
+        <label for="higherWhyInput">The Higher "Why" (Service & Sovereign Impact)</label>
+        <textarea 
+          id="higherWhyInput"
+          rows="2" 
+          [(ngModel)]="crownData.higherWhy" 
+          placeholder="Why does the universe require this manifestation through your hands?"></textarea>
+      </div>
+
+      <!-- Cosmic Anchor Phrase -->
+      <div class="cosmic-anchor-box">
+        <label for="cosmicAnchorPhraseInput">Cosmic Anchor Phrase</label>
+        <input 
+          id="cosmicAnchorPhraseInput"
+          type="text" 
+          [(ngModel)]="crownData.cosmicAnchorPhrase" 
+          placeholder="A ceremonial affirmation anchoring the blueprint into reality..."
+          autocomplete="off"
+        />
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Grounding Checklist -->
+  <div class="checklist-card">
+    <h4 class="checklist-heading">
+      <span class="shield-icon">🛡</span>
+      <span>3. Grounding Checklist: Crown Alignment</span>
+    </h4>
+    <div class="checklist-items">
+      @for (task of groundingTasks; track task.id) {
+        <label 
+          class="check-item-row" 
+          [class.completed]="task.completed"
+          (click)="toggleGroundingTask(task.id)">
+          <span class="check-box-indicator">
+            @if (task.completed) { ✓ }
+          </span>
+          <span class="task-label">{{ task.label }}</span>
+        </label>
+      }
+    </div>
+  </div>
+</section>

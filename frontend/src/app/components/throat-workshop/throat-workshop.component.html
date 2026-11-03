@@ -1,0 +1,181 @@
+<section class="throat-studio-container">
+  <!-- 1. Assessment Diagnostic -->
+  <div class="diagnostic-card">
+    <div class="diagnostic-header">
+      <div class="diagnostic-title-group">
+        <span class="diagnostic-orb"></span>
+        <h4 class="diagnostic-heading">1. Assessment Diagnostic: Vocal Truth & Declaration</h4>
+      </div>
+      <span class="diagnostic-score-badge">{{ diagnosticScore }}/10 Vocal Power</span>
+    </div>
+    <p class="diagnostic-prompt">
+      Can you declare your goal aloud to another human being or into the open room with zero apology, shame, or throat tightness?
+    </p>
+    <input 
+      type="range" 
+      min="1" 
+      max="10" 
+      [(ngModel)]="diagnosticScore" 
+      class="diagnostic-slider"
+    />
+    <div class="slider-scale-labels">
+      <span>1 - Muffled / Swallowed Voice</span>
+      <span>5 - Moderate Confidence</span>
+      <span>10 - Resonant Sovereign Authority</span>
+    </div>
+  </div>
+
+  <!-- 2. Catalytic Tool: Proclamation & Solfeggio Synth -->
+  <div class="throat-tool-card">
+    <div class="card-header-bar">
+      <div class="header-with-icon">
+        <svg class="header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+          <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+          <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+        </svg>
+        <h4>2. Catalytic Tool: Solfeggio Tone Synth & Truth Proclamation</h4>
+      </div>
+      <button 
+        type="button" 
+        class="btn-speak-aloud" 
+        (click)="speakAloudProclamation()"
+        title="Vocalize declaration using browser Speech Synthesis">
+        <svg class="btn-mic-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path>
+          <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+          <line x1="12" y1="19" x2="12" y2="22"></line>
+        </svg>
+        <span>Speak Aloud</span>
+      </button>
+    </div>
+
+    <!-- Declarations and Seed Mantras -->
+    <div class="declarations-grid">
+      <div class="field-box full-width">
+        <label for="spokenDeclarationInput">Spoken Truth Declaration</label>
+        <textarea 
+          id="spokenDeclarationInput"
+          rows="2" 
+          [(ngModel)]="throatData.spokenDeclaration" 
+          placeholder="I command the physical manifestation of..."></textarea>
+      </div>
+
+      <div class="field-box">
+        <label for="seedMantraInput">Seed Mantra (Sanskrit / Vocal Tone)</label>
+        <input 
+          id="seedMantraInput"
+          type="text" 
+          [(ngModel)]="throatData.seedMantra" 
+          class="font-mono"
+        />
+      </div>
+
+      <div class="field-box">
+        <label for="dailyAffirmationInput">Daily Proclamation Statement</label>
+        <input 
+          id="dailyAffirmationInput"
+          type="text" 
+          [(ngModel)]="throatData.dailyAffirmation" 
+        />
+      </div>
+    </div>
+
+    <!-- Solfeggio Frequency Generator Panel -->
+    <div class="solfeggio-generator-panel">
+      <div class="panel-header-row">
+        <div>
+          <span class="panel-title">Harmonic Solfeggio & Binaural Frequency Engine</span>
+          <p class="panel-subtitle">Calibrated pure sine wave oscillation to restore clear throat energetic flow.</p>
+        </div>
+        <button 
+          type="button" 
+          class="btn-tone-toggle"
+          [class.playing]="isToneActive"
+          (click)="toggleHarmonicSound()">
+          @if (isToneActive) {
+            <span>■ Silence Resonance</span>
+          } @else {
+            <span>▶ Activate {{ throatData.selectedFrequency }}Hz Tone</span>
+          }
+        </button>
+      </div>
+
+      <!-- Frequency Grid Selection -->
+      <div class="solfeggio-grid">
+        @for (opt of solfeggioOptions; track opt.frequency) {
+          <button 
+            type="button" 
+            class="solfeggio-card" 
+            [class.selected]="throatData.selectedFrequency === opt.frequency"
+            (click)="selectFrequency(opt.frequency)">
+            <div class="card-top">
+              <span class="freq-tag">{{ opt.name }}</span>
+              @if (throatData.selectedFrequency === opt.frequency && isToneActive) {
+                <span class="active-pulse-dot"></span>
+              }
+            </div>
+            <span class="opt-chakra-label">{{ opt.chakra }}</span>
+            <p class="opt-benefit">{{ opt.benefit }}</p>
+          </button>
+        }
+      </div>
+
+      <!-- Volume & Binaural Slider Rows -->
+      <div class="sound-controls-row">
+        <div class="slider-control-group">
+          <div class="control-label-row">
+            <span>Master Harmonic Volume</span>
+            <span class="mono-value">{{ (masterVolume * 100) | number:'1.0-0' }}%</span>
+          </div>
+          <input 
+            type="range" 
+            min="0.05" 
+            max="0.8" 
+            step="0.05" 
+            [ngModel]="masterVolume" 
+            (ngModelChange)="onVolumeSliderChange(+$event)"
+            class="cyan-slider"
+          />
+        </div>
+
+        <div class="slider-control-group">
+          <div class="control-label-row">
+            <span>Binaural Pulse Offset (Theta / Alpha)</span>
+            <span class="mono-value highlight">{{ binauralOffset }}Hz</span>
+          </div>
+          <input 
+            type="range" 
+            min="1" 
+            max="14" 
+            step="1" 
+            [ngModel]="binauralOffset" 
+            (ngModelChange)="onBinauralSliderChange(+$event)"
+            class="cyan-slider"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Grounding Checklist -->
+  <div class="checklist-card">
+    <h4 class="checklist-heading">
+      <span class="shield-icon">🛡</span>
+      <span>3. Grounding Checklist: Throat Alignment</span>
+    </h4>
+    <div class="checklist-items">
+      @for (task of groundingTasks; track task.id) {
+        <label 
+          class="check-item-row" 
+          [class.completed]="task.completed"
+          (click)="toggleGroundingTask(task.id)">
+          <span class="check-box-indicator">
+            @if (task.completed) { ✓ }
+          </span>
+          <span class="task-label">{{ task.label }}</span>
+        </label>
+      }
+    </div>
+  </div>
+</section>

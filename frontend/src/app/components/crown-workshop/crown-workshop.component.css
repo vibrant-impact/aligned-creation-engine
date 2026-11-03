@@ -1,0 +1,319 @@
+:host {
+  display: block;
+}
+
+.crown-studio-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* 1. Diagnostic Card */
+.diagnostic-card {
+  background: rgba(15, 19, 32, 0.85);
+  border: 1px solid rgba(179, 136, 255, 0.25);
+  border-radius: 16px;
+  padding: 20px 24px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.diagnostic-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.diagnostic-title-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.diagnostic-orb {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background-color: #b388ff;
+  box-shadow: 0 0 10px #b388ff;
+}
+
+.diagnostic-heading {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #b388ff;
+  margin: 0;
+}
+
+.diagnostic-score-badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  color: #b388ff;
+  background: rgba(179, 136, 255, 0.15);
+  border: 1px solid rgba(179, 136, 255, 0.35);
+  padding: 3px 10px;
+  border-radius: 12px;
+}
+
+.diagnostic-prompt {
+  font-size: 0.85rem;
+  color: #cbd5e1;
+  margin: 0;
+}
+
+.diagnostic-slider {
+  accent-color: #b388ff;
+  cursor: pointer;
+  width: 100%;
+}
+
+.slider-scale-labels {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: #64748b;
+}
+
+/* 2. Tool Card */
+.crown-tool-card {
+  background: rgba(15, 19, 32, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 24px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.card-header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 14px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.header-with-icon {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.header-with-icon h4 {
+  font-size: 1.1rem;
+  color: #ffffff;
+  margin: 0;
+}
+
+.header-icon {
+  width: 18px;
+  height: 18px;
+  color: #b388ff;
+}
+
+.actions-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-crown-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(179, 136, 255, 0.15);
+  border: 1px solid rgba(179, 136, 255, 0.4);
+  color: #d1b8ff;
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-crown-action:hover {
+  background: rgba(179, 136, 255, 0.28);
+  box-shadow: 0 0 10px rgba(179, 136, 255, 0.3);
+  color: #ffffff;
+}
+
+.btn-crown-action.active {
+  background: #b388ff;
+  color: #080a14;
+  border-color: #b388ff;
+  box-shadow: 0 0 12px rgba(179, 136, 255, 0.5);
+}
+
+.btn-action-icon {
+  width: 13px;
+  height: 13px;
+}
+
+/* Fields */
+.fields-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.field-box {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field-box label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #b388ff;
+  letter-spacing: 0.5px;
+}
+
+.field-box textarea {
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: #f1f5f9;
+  font-size: 0.85rem;
+  padding: 10px 12px;
+  outline: none;
+  font-family: inherit;
+  line-height: 1.5;
+  transition: border-color 0.2s ease;
+  resize: vertical;
+}
+
+.field-box textarea:focus {
+  border-color: #b388ff;
+}
+
+/* Cosmic Anchor Box */
+.cosmic-anchor-box {
+  background: rgba(179, 136, 255, 0.1);
+  border: 1px solid rgba(179, 136, 255, 0.3);
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.cosmic-anchor-box label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #d1b8ff;
+  letter-spacing: 0.5px;
+}
+
+.cosmic-anchor-box input {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(179, 136, 255, 0.3);
+  border-radius: 8px;
+  color: #ffd600;
+  font-size: 0.95rem;
+  font-style: italic;
+  padding: 10px 14px;
+  outline: none;
+}
+
+.cosmic-anchor-box input:focus {
+  border-color: #ffd600;
+}
+
+/* 3. Checklist Card */
+.checklist-card {
+  background: rgba(15, 19, 32, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 20px 24px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.checklist-heading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #f1f5f9;
+  margin: 0;
+}
+
+.shield-icon {
+  font-size: 12px;
+}
+
+.checklist-items {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.check-item-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+  padding: 10px 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.check-item-row:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(179, 136, 255, 0.3);
+}
+
+.check-box-indicator {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  border: 1px solid #64748b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: #080a14;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.check-item-row.completed .check-box-indicator {
+  background-color: #b388ff;
+  border-color: #b388ff;
+}
+
+.task-label {
+  font-size: 0.85rem;
+  color: #e2e8f0;
+}
+
+.check-item-row.completed .task-label {
+  text-decoration: line-through;
+  color: #64748b;
+}

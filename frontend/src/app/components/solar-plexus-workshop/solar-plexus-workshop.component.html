@@ -1,0 +1,165 @@
+<section class="solar-plexus-studio-container">
+  <!-- 1. Assessment Diagnostic -->
+  <div class="diagnostic-card">
+    <div class="diagnostic-header">
+      <div class="diagnostic-title-group">
+        <span class="diagnostic-orb"></span>
+        <h4 class="diagnostic-heading">1. Assessment Diagnostic: Sovereign Will & Execution Capacity</h4>
+      </div>
+      <span class="diagnostic-score-badge">{{ diagnosticScore }}/10 Sovereign Power</span>
+    </div>
+    <p class="diagnostic-prompt">
+      Do you possess absolute internal agency and momentum to execute without hesitation, or are subconscious friction and procrastination dissipating your willpower?
+    </p>
+    <input 
+      type="range" 
+      min="1" 
+      max="10" 
+      [(ngModel)]="diagnosticScore" 
+      class="diagnostic-slider"
+    />
+    <div class="slider-scale-labels">
+      <span>1 - Paralysis & Self-Doubt</span>
+      <span>5 - Conditional Action</span>
+      <span>10 - Unstoppable Sovereign Will</span>
+    </div>
+  </div>
+
+  <!-- 2. Catalytic Tool: Belief Alchemist & Kinetic Action Matrix -->
+  <div class="solar-plexus-tool-card">
+    <div class="card-header-bar">
+      <div class="header-with-icon">
+        <svg class="header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+        </svg>
+        <h4>2. Catalytic Tool: AI Belief Alchemist & Micro-Action Matrix</h4>
+      </div>
+      <div class="actions-group">
+        <button 
+          type="button" 
+          class="btn-sp-tone"
+          [class.active]="audioService.isPlaying && audioService.currentCarrierFrequency === 528"
+          (click)="audioService.isPlaying && audioService.currentCarrierFrequency === 528 ? stopSolarPlexusTone() : playSolarPlexusTone()">
+          <span class="btn-icon">⚡</span>
+          <span>{{ audioService.isPlaying && audioService.currentCarrierFrequency === 528 ? 'Stop 528Hz' : '528Hz Solar Tone' }}</span>
+        </button>
+        <span class="progress-pill">
+          {{ completedCount }}/{{ actionSteps.length }} Aligned ({{ completionPercentage }}%)
+        </span>
+      </div>
+    </div>
+
+    <!-- AI Belief Alchemist -->
+    <div class="alchemist-block">
+      <div class="alchemist-header">
+        <div>
+          <span class="alchemist-title">Solar Plexus Belief Alchemist</span>
+          <p class="alchemist-subtitle">Transmute subconscious doubt and hesitation into sovereign will.</p>
+        </div>
+        <span class="ai-badge">AI Powered</span>
+      </div>
+
+      <form class="belief-form" (ngSubmit)="handleReframeBelief()">
+        <textarea
+          [(ngModel)]="limitingBeliefInput"
+          name="limitingBeliefInput"
+          placeholder="Name your hesitation or limiting belief (e.g., 'I lack the experience to compete with senior developers')..."
+          rows="2"
+          required></textarea>
+        <div class="belief-form-footer">
+          <button type="submit" class="btn-alchemize" [disabled]="isReframing">
+            {{ isReframing ? 'Transmuting Friction...' : '⚡ Alchemize Belief' }}
+          </button>
+        </div>
+      </form>
+
+      @if (beliefTransformations.length > 0) {
+        <div class="transformations-container">
+          @for (item of beliefTransformations; track item.id) {
+            <div class="transformation-card">
+              <div class="transmuted-header">
+                <span class="doubt-label">Limiting Thought:</span>
+                <p class="doubt-text">"{{ item.limitingBelief }}"</p>
+              </div>
+              <div class="transmuted-body">
+                <span class="affirmation-label">Sovereign Affirmation:</span>
+                <p class="affirmation-text">{{ item.reframedAffirmation }}</p>
+              </div>
+              <div class="anchor-footer">
+                <span class="anchor-label">Action Anchor:</span>
+                <span class="anchor-text">{{ item.actionAnchor }}</span>
+                <button type="button" class="btn-adopt-anchor" (click)="adoptAnchorAsAction(item.actionAnchor)">
+                  + Add to Action Matrix
+                </button>
+              </div>
+            </div>
+          }
+        </div>
+      }
+    </div>
+
+    <!-- Micro-Action Matrix -->
+    <div class="action-matrix-block">
+      <div class="matrix-header">
+        <div>
+          <span class="matrix-title">Micro-Action Execution Matrix</span>
+          <p class="matrix-subtitle">Anchor mental intention into concrete kinetic motion.</p>
+        </div>
+      </div>
+
+      <div class="action-progress-track">
+        <div class="action-progress-bar" [style.width.%]="completionPercentage"></div>
+      </div>
+
+      <form class="action-input-form" (ngSubmit)="handleAddAction()">
+        <input 
+          type="text" 
+          [(ngModel)]="newActionTitle" 
+          name="newActionTitle" 
+          placeholder="Commit to a specific micro-step..." 
+          required 
+          autocomplete="off"
+        />
+        <button type="submit" class="btn-action-add" [disabled]="isAddingAction">
+          {{ isAddingAction ? 'Adding...' : '+ Add Step' }}
+        </button>
+      </form>
+
+      <ul class="action-list">
+        @for (step of actionSteps; track step.id) {
+          <li class="action-item" [class.completed]="step.isCompleted" (click)="handleToggleAction(step)">
+            <div class="checkbox-indicator">
+              @if (step.isCompleted) {
+                <span>✓</span>
+              }
+            </div>
+            <span class="action-title">{{ step.title }}</span>
+          </li>
+        } @empty {
+          <li class="empty-state">No micro-steps defined yet. Add your first step above or adopt one from the Alchemist.</li>
+        }
+      </ul>
+    </div>
+  </div>
+
+  <!-- 3. Grounding Checklist -->
+  <div class="checklist-card">
+    <h4 class="checklist-heading">
+      <span class="shield-icon">🛡</span>
+      <span>3. Grounding Checklist: Solar Plexus Alignment</span>
+    </h4>
+    <div class="checklist-items">
+      @for (task of groundingTasks; track task.id) {
+        <label 
+          class="check-item-row" 
+          [class.completed]="task.completed"
+          (click)="toggleGroundingTask(task.id)">
+          <span class="check-box-indicator">
+            @if (task.completed) { ✓ }
+          </span>
+          <span class="task-label">{{ task.label }}</span>
+        </label>
+      }
+    </div>
+  </div>
+</section>

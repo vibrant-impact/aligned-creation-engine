@@ -1,0 +1,175 @@
+<section class="heart-studio-container">
+  <!-- 1. Assessment Diagnostic -->
+  <div class="diagnostic-card">
+    <div class="diagnostic-header">
+      <div class="diagnostic-title-group">
+        <span class="diagnostic-orb"></span>
+        <h4 class="diagnostic-heading">1. Assessment Diagnostic: Openness to Receive</h4>
+      </div>
+      <span class="diagnostic-score-badge">{{ diagnosticScore }}/10 Heart Coherence</span>
+    </div>
+    <p class="diagnostic-prompt">
+      Are you grasping at this goal from an anxious state of lack or fear of disappointment, or can you rest in gratitude that it is already energetically received?
+    </p>
+    <input 
+      type="range" 
+      min="1" 
+      max="10" 
+      [(ngModel)]="diagnosticScore" 
+      class="diagnostic-slider"
+    />
+    <div class="slider-scale-labels">
+      <span>1 - Desperation & Grasping</span>
+      <span>5 - Hopeful Receptivity</span>
+      <span>10 - Pure Radiant Pre-Gratitude</span>
+    </div>
+  </div>
+
+  <!-- 2. Catalytic Tool: 0.1Hz Coherence Pacer & Pre-Gratitude Bridge -->
+  <div class="heart-tool-card">
+    <div class="card-header-bar">
+      <div class="header-with-icon">
+        <svg class="header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>
+        </svg>
+        <h4>2. Catalytic Tool: Somatic Pre-Gratitude Bridge & Coherence Breath</h4>
+      </div>
+      <span class="heart-badge">Anahata Resonance</span>
+    </div>
+
+    <!-- 0.1 Hz Heart-Brain Coherence Breath Visual Pacer -->
+    <div class="coherence-pacer-box">
+      <span class="pacer-eyebrow">0.1 Hz Heart-Brain Coherence Pacer</span>
+      <p class="pacer-explanation">
+        Harmonizes heart rate variability (HRV) and soothes nervous system defense mechanisms so your body feels secure holding this expanded reality.
+      </p>
+
+      <!-- Concentric Pulsing Breathing Ring -->
+      <div class="pacer-circle-wrapper">
+        <div 
+          class="pacer-aura-glow"
+          [class.inhale]="breathPhase === 'Inhale'"
+          [class.hold]="breathPhase === 'Hold'"
+          [class.exhale]="breathPhase === 'Exhale'">
+        </div>
+
+        <div 
+          class="pacer-center-orb"
+          [class.inhale]="breathPhase === 'Inhale'"
+          [class.hold]="breathPhase === 'Hold'"
+          [class.exhale]="breathPhase === 'Exhale'">
+          <span class="phase-label">{{ isBreathingPacerActive ? breathPhase : 'Ready' }}</span>
+          <span class="phase-timer">{{ isBreathingPacerActive ? phaseSecondsRemaining + 's' : '5s' }}</span>
+        </div>
+      </div>
+
+      <!-- Controls & Cycles Counter -->
+      <div class="pacer-controls-row">
+        <button 
+          type="button" 
+          class="btn-pacer-toggle"
+          [class.active]="isBreathingPacerActive"
+          (click)="toggleBreathingPacer()">
+          @if (isBreathingPacerActive) {
+            <span>❚❚ Pause Pacer</span>
+          } @else {
+            <span>▶ Begin 0.1 Hz Coherence</span>
+          }
+        </button>
+
+        @if (completedBreathCycles > 0) {
+          <span class="cycles-badge">
+            {{ completedBreathCycles }} Completed Cycles
+          </span>
+        }
+      </div>
+    </div>
+
+    <!-- Pre-Gratitude Logging Journal -->
+    <div class="pregratitude-section">
+      <div class="section-title-row">
+        <div>
+          <span class="section-heading">Pre-Gratitude Logs (Living in the End)</span>
+          <p class="section-subtitle">Express concrete thanks for the intention as if it has already settled into physical history[cite: 1].</p>
+        </div>
+      </div>
+
+      <!-- Input Box -->
+      <div class="entry-creation-box">
+        <input 
+          type="text" 
+          [(ngModel)]="newEntryText" 
+          placeholder="e.g., 'Thank you for the first 3 clients who value our creative craft and contracted effortlessly...'" 
+          class="input-gratitude-text"
+        />
+        <div class="entry-bottom-row">
+          <input 
+            type="text" 
+            [(ngModel)]="newEntryFeeling" 
+            placeholder="Somatic feeling tone (e.g., 'Warm expansive release in chest cavity')" 
+            class="input-gratitude-feeling"
+          />
+          <button 
+            type="button" 
+            class="btn-log-gratitude" 
+            (click)="handleAddGratitudeEntry()">
+            + Log Pre-Gratitude
+          </button>
+        </div>
+      </div>
+
+      <!-- Logged Entries List -->
+      <div class="entries-feed">
+        @for (entry of preGratitudeEntries; track entry.id) {
+          <div class="gratitude-entry-card">
+            <div class="entry-main-col">
+              <p class="entry-quote">"{{ entry.text }}"</p>
+              <div class="entry-meta-line">
+                <span class="meta-resonance">Somatic Resonance: {{ entry.feelingTone }}</span>
+                <span class="meta-date">{{ entry.date }}</span>
+              </div>
+            </div>
+            <button 
+              type="button" 
+              class="btn-remove-entry" 
+              (click)="handleRemoveGratitudeEntry(entry.id)"
+              title="Remove entry">
+              ✕
+            </button>
+          </div>
+        }
+      </div>
+    </div>
+
+    <!-- Somatic Bodily Sensations Field -->
+    <div class="somatic-field-box">
+      <label for="somaticNotesInput">Somatic Bodily Sensations</label>
+      <textarea 
+        id="somaticNotesInput"
+        rows="2" 
+        [(ngModel)]="somaticResonanceNotes" 
+        placeholder="Describe what occurs in your physical heart space when you drop expectation and rest in fulfilled completion..."></textarea>
+    </div>
+  </div>
+
+  <!-- 3. Grounding Checklist -->
+  <div class="checklist-card">
+    <h4 class="checklist-heading">
+      <span class="shield-icon">🛡</span>
+      <span>3. Grounding Checklist: Heart Coherence</span>
+    </h4>
+    <div class="checklist-items">
+      @for (task of groundingTasks; track task.id) {
+        <label 
+          class="check-item-row" 
+          [class.completed]="task.completed"
+          (click)="toggleGroundingTask(task.id)">
+          <span class="check-box-indicator">
+            @if (task.completed) { ✓ }
+          </span>
+          <span class="task-label">{{ task.label }}</span>
+        </label>
+      }
+    </div>
+  </div>
+</section>

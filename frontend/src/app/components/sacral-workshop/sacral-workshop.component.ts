@@ -7,7 +7,7 @@ import {
   GeneratedSigilGeometry 
 } from '../../utils/sigil.engine';
 import { AudioService } from '../../services/audio.service';
-import { SigilConfig } from '../../models/manifestation.model';
+import { SigilConfig, GroundingTask } from '../../models/manifestation.model';
 
 @Component({
   selector: 'app-sacral-workshop',
@@ -18,6 +18,8 @@ import { SigilConfig } from '../../models/manifestation.model';
 })
 export class SacralWorkshopComponent implements OnInit, OnDestroy {
   @Input() public intentionTitle: string = 'CREATIVE FLOW';
+
+  public diagnosticScore: number = 8;
 
   public seedPhraseInput: string = '';
   public uniqueCharacters: string[] = [];
@@ -38,7 +40,26 @@ export class SacralWorkshopComponent implements OnInit, OnDestroy {
   public isSprintActive: boolean = false;
   private sprintTimerInterval: ReturnType<typeof setInterval> | null = null;
 
-  constructor(private readonly audioService: AudioService) {}
+  // Stage 2 Grounding Checklist
+  public groundingTasks: GroundingTask[] = [
+    {
+      id: 'task_sacral_sigil',
+      label: 'Alchemize intent into a completed sacred geometric sigil',
+      completed: true
+    },
+    {
+      id: 'task_sacral_sprint',
+      label: 'Complete a 25-minute deep creative flow sprint (417 Hz)',
+      completed: false
+    },
+    {
+      id: 'task_sacral_export',
+      label: 'Export SVG vector artifact for physical engraving or visual altar placement',
+      completed: false
+    }
+  ];
+
+  constructor(public readonly audioService: AudioService) {}
 
   public ngOnInit(): void {
     this.seedPhraseInput = this.intentionTitle ? this.intentionTitle.toUpperCase() : 'CREATIVE FLOW';
@@ -87,6 +108,16 @@ export class SacralWorkshopComponent implements OnInit, OnDestroy {
     );
   }
 
+  public calculateRosetteX(centerCoordinate: number, ringRadius: number, angleDegrees: number): number {
+    const angleInRadians = (angleDegrees * Math.PI) / 180;
+    return Number((centerCoordinate + (ringRadius * 0.5) * Math.cos(angleInRadians)).toFixed(2));
+  }
+
+  public calculateRosetteY(centerCoordinate: number, ringRadius: number, angleDegrees: number): number {
+    const angleInRadians = (angleDegrees * Math.PI) / 180;
+    return Number((centerCoordinate + (ringRadius * 0.5) * Math.sin(angleInRadians)).toFixed(2));
+  }
+
   public downloadSvgVector(): void {
     const svgElement = document.getElementById('sacredSigilSvgCanvas');
     if (!svgElement) return;
@@ -103,9 +134,9 @@ export class SacralWorkshopComponent implements OnInit, OnDestroy {
     downloadLink.click();
     document.body.removeChild(downloadLink);
     URL.revokeObjectURL(blobUrl);
+    this.audioService.playAlignmentChime(417);
   }
 
-  // Creative Flow Sprint Timer handlers
   public toggleSprintTimer(): void {
     if (this.isSprintActive) {
       this.stopSprintTimer();
@@ -122,7 +153,6 @@ export class SacralWorkshopComponent implements OnInit, OnDestroy {
   private startSprintTimer(): void {
     this.isSprintActive = true;
     if (!this.audioService.isPlaying) {
-      // 417 Hz corresponds to the Sacral Svadhisthana frequency for creative expression
       this.audioService.playHarmonicTone(417, 6, 0.18);
     }
 
@@ -131,7 +161,7 @@ export class SacralWorkshopComponent implements OnInit, OnDestroy {
         this.secondsRemaining--;
       } else {
         this.stopSprintTimer();
-        this.audioService.playAlignmentChime(528);
+        this.audioService.playAlignmentChime(417);
       }
     }, 1000);
   }
@@ -150,13 +180,21 @@ export class SacralWorkshopComponent implements OnInit, OnDestroy {
     return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
   }
 
-  public calculateRosetteX(centerCoordinate: number, ringRadius: number, angleDegrees: number): number {
-    const angleInRadians = (angleDegrees * Math.PI) / 180;
-    return Number((centerCoordinate + (ringRadius * 0.5) * Math.cos(angleInRadians)).toFixed(2));
+  public playSacralTone(): void {
+    this.audioService.playHarmonicTone(417, 6, 0.2);
   }
 
-  public calculateRosetteY(centerCoordinate: number, ringRadius: number, angleDegrees: number): number {
-    const angleInRadians = (angleDegrees * Math.PI) / 180;
-    return Number((centerCoordinate + (ringRadius * 0.5) * Math.sin(angleInRadians)).toFixed(2));
+  public stopSacralTone(): void {
+    this.audioService.stopHarmonicTone();
+  }
+
+  public toggleGroundingTask(taskId: string): void {
+    const targetTask = this.groundingTasks.find((task) => task.id === taskId);
+    if (targetTask) {
+      targetTask.completed = !targetTask.completed;
+      if (targetTask.completed) {
+        this.audioService.playAlignmentChime(417);
+      }
+    }
   }
 }

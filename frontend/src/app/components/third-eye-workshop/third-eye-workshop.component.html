@@ -1,0 +1,159 @@
+<section class="third-eye-studio-container">
+  <!-- Assessment Diagnostic -->
+  <div class="diagnostic-card">
+    <div class="diagnostic-header">
+      <div class="diagnostic-title-group">
+        <span class="diagnostic-orb"></span>
+        <h4 class="diagnostic-heading">1. Assessment Diagnostic: Multi-Sensory Vividness</h4>
+      </div>
+      <span class="diagnostic-score-badge">{{ diagnosticScore }}/10 Vividness</span>
+    </div>
+    <p class="diagnostic-prompt">
+      Can you perceive your manifested goal so tangibly that your physical nervous system registers it as already accomplished?
+    </p>
+    <input 
+      type="range" 
+      min="1" 
+      max="10" 
+      [(ngModel)]="diagnosticScore" 
+      class="diagnostic-slider"
+    />
+    <div class="slider-scale-labels">
+      <span>1 - Abstract & Fuzzy</span>
+      <span>5 - Clear Imagery</span>
+      <span>10 - Holographic Physical Reality</span>
+    </div>
+  </div>
+
+  <!-- Catalytic Tool: 4-Channel Sensory Engine -->
+  <div class="sensory-matrix-card">
+    <div class="card-header-bar">
+      <div class="header-with-icon">
+        <svg class="header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path>
+          <circle cx="12" cy="12" r="3"></circle>
+        </svg>
+        <h4>2. Catalytic Tool: Sensory Goal Focus Engine</h4>
+      </div>
+      <span class="sub-label-badge">Ajna Holographic Mapping</span>
+    </div>
+
+    <!-- 4-Quadrant Sensory Grid -->
+    <div class="sensory-quadrant-grid">
+      <!-- Sight -->
+      <div class="sensory-quadrant-box">
+        <label for="sightNotesInput">Sensory Cues: SIGHT</label>
+        <textarea 
+          id="sightNotesInput"
+          rows="2" 
+          [(ngModel)]="sensoryData.sightNotes" 
+          placeholder="Define visual elements (colors, lighting, forms, architectural workspace)..."></textarea>
+      </div>
+
+      <!-- Sound -->
+      <div class="sensory-quadrant-box">
+        <label for="soundNotesInput">Sensory Cues: SOUND</label>
+        <textarea 
+          id="soundNotesInput"
+          rows="2" 
+          [(ngModel)]="sensoryData.soundNotes" 
+          placeholder="Define acoustic elements (ambient hum, congratulatory dialogue, tone of voice)..."></textarea>
+      </div>
+
+      <!-- Somatic Feeling -->
+      <div class="sensory-quadrant-box">
+        <label for="feelingNotesInput">Sensory Cues: SOMATIC FEELING</label>
+        <textarea 
+          id="feelingNotesInput"
+          rows="2" 
+          [(ngModel)]="sensoryData.feelingNotes" 
+          placeholder="Define physical body sensations (grounded feet, weightless ribs, heart warmth)..."></textarea>
+      </div>
+
+      <!-- Smell & Taste -->
+      <div class="sensory-quadrant-box">
+        <label for="smellTasteNotesInput">Sensory Cues: SMELL / TASTE</label>
+        <textarea 
+          id="smellTasteNotesInput"
+          rows="2" 
+          [(ngModel)]="sensoryData.smellTasteNotes" 
+          placeholder="Define olfactory anchors (fresh cedarwood, espresso, mountain rain)..."></textarea>
+      </div>
+    </div>
+
+    <!-- Holographic Vision Anchor Phrase -->
+    <div class="vision-anchor-box">
+      <label for="visionAnchorInput">Holographic Vision Anchor Statement</label>
+      <input 
+        id="visionAnchorInput"
+        type="text" 
+        [(ngModel)]="sensoryData.visionAnchorPhrase" 
+        placeholder="State the unequivocal truth of the complete manifestation..."
+        autocomplete="off"
+      />
+    </div>
+
+    <!-- Interactive Mood Board Canvas -->
+    <div class="mood-gallery-section">
+      <div class="gallery-header-row">
+        <span class="gallery-title">Interactive Vision Canvas</span>
+        <span class="gallery-counter">{{ sensoryData.moodImages.length }} Visual Anchors</span>
+      </div>
+
+      <div class="gallery-grid">
+        @for (image of sensoryData.moodImages; track image.id) {
+          <div class="gallery-tile">
+            <img [src]="image.url" [alt]="image.caption" loading="lazy" />
+            <div class="tile-overlay">
+              <span class="tile-caption">{{ image.caption }}</span>
+              <button 
+                type="button" 
+                class="btn-remove-tile" 
+                (click)="handleRemoveImage(image.id)" 
+                title="Remove image">
+                ✕
+              </button>
+            </div>
+          </div>
+        }
+      </div>
+
+      <!-- Add New Image Anchor Bar -->
+      <div class="add-image-panel">
+        <div class="inputs-row">
+          <input 
+            type="url" 
+            [(ngModel)]="newImageUrlInput" 
+            placeholder="Paste image URL (https://...)" 
+            class="input-url"
+          />
+          <input 
+            type="text" 
+            [(ngModel)]="newImageCaptionInput" 
+            placeholder="Caption (e.g., Loft Studio)" 
+            class="input-caption"
+          />
+          <button 
+            type="button" 
+            class="btn-add-image" 
+            (click)="handleAddCustomImage()">
+            + Add Anchor
+          </button>
+        </div>
+
+        <!-- Curated Preset Inspiration Chips -->
+        <div class="preset-chips-row">
+          <span class="presets-label">Curated Presets:</span>
+          @for (preset of curatedPresets; track preset.id) {
+            <button 
+              type="button" 
+              class="preset-chip-btn" 
+              (click)="handleApplyPreset(preset)">
+              + {{ preset.caption }}
+            </button>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

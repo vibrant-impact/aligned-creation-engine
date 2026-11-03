@@ -1,0 +1,159 @@
+<section class="root-studio-container">
+  <!-- 1. Assessment Diagnostic -->
+  <div class="diagnostic-card">
+    <div class="diagnostic-header">
+      <div class="diagnostic-title-group">
+        <span class="diagnostic-orb"></span>
+        <h4 class="diagnostic-heading">1. Assessment Diagnostic: Physical Anchoring & Grounded Stability</h4>
+      </div>
+      <span class="diagnostic-score-badge">{{ diagnosticScore }}/10 Physical Grounding</span>
+    </div>
+    <p class="diagnostic-prompt">
+      Does this intention exist merely as an ethereal daydream, or does it possess physical inertia, scheduled milestones, and unshakeable root stability?
+    </p>
+    <input 
+      type="range" 
+      min="1" 
+      max="10" 
+      [(ngModel)]="diagnosticScore" 
+      class="diagnostic-slider"
+    />
+    <div class="slider-scale-labels">
+      <span>1 - Ethereal Fantasy</span>
+      <span>5 - Partial Logistics</span>
+      <span>10 - Irrevocable Physical Reality</span>
+    </div>
+  </div>
+
+  <!-- 2. Catalytic Tool: 3-Phase Milestone Execution Ladder -->
+  <div class="root-tool-card">
+    <div class="card-header-bar">
+      <div class="header-with-icon">
+        <svg class="header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+          <polyline points="9 22 9 12 15 12 15 22"></polyline>
+        </svg>
+        <h4>2. Catalytic Tool: Physical Milestone Execution Ladder</h4>
+      </div>
+      <div class="actions-group">
+        <button 
+          type="button" 
+          class="btn-root-tone"
+          [class.active]="audioService.isPlaying && audioService.currentCarrierFrequency === 396"
+          (click)="audioService.isPlaying && audioService.currentCarrierFrequency === 396 ? stopRootTone() : playRootTone()">
+          <span class="btn-icon">⚡</span>
+          <span>{{ audioService.isPlaying && audioService.currentCarrierFrequency === 396 ? 'Stop 396Hz' : '396Hz Root Tone' }}</span>
+        </button>
+        <span class="progress-pill">
+          {{ completedMilestonesCount }}/{{ totalMilestonesCount }} Anchored ({{ completionPercentage }}%)
+        </span>
+      </div>
+    </div>
+
+    <!-- Master Grounding Progress Bar -->
+    <div class="root-progress-track">
+      <div class="root-progress-bar" [style.width.%]="completionPercentage"></div>
+    </div>
+
+    <!-- 3-Phase Manifestation Ladder -->
+    <div class="phases-ladder">
+      @for (phase of manifestationPhases; track phase.phaseNumber) {
+        <div class="phase-card">
+          <div class="phase-header">
+            <div class="phase-badge-title">
+              <span class="phase-step-pill">Phase {{ phase.phaseNumber }}</span>
+              <h5 class="phase-title">{{ phase.phaseName }}</h5>
+            </div>
+            <span class="phase-focus-tag">{{ phase.focus }}</span>
+          </div>
+
+          <!-- Milestones List -->
+          <div class="milestones-list">
+            @for (milestone of phase.milestones; track milestone.id) {
+              <div 
+                class="milestone-item-row" 
+                [class.completed]="milestone.isCompleted"
+                (click)="toggleMilestone(milestone)">
+                <div class="milestone-checkbox">
+                  @if (milestone.isCompleted) { ✓ }
+                </div>
+                <div class="milestone-text-block">
+                  <span class="milestone-title">{{ milestone.title }}</span>
+                  <span class="milestone-timeline">{{ milestone.dueDate }}</span>
+                </div>
+                <button 
+                  type="button" 
+                  class="btn-delete-milestone" 
+                  (click)="$event.stopPropagation(); removeMilestone(phase.phaseNumber, milestone.id)"
+                  title="Remove milestone">
+                  ✕
+                </button>
+              </div>
+            }
+          </div>
+        </div>
+      }
+    </div>
+
+    <!-- Add Milestone Control Bar -->
+    <div class="add-milestone-panel">
+      <span class="panel-tag">Add Physical Anchor Milestone</span>
+      <div class="milestone-input-row">
+        <select [(ngModel)]="targetPhaseNumber" class="select-phase">
+          <option [value]="1">Phase 1: Foundation</option>
+          <option [value]="2">Phase 2: Momentum</option>
+          <option [value]="3">Phase 3: Realization</option>
+        </select>
+        <input 
+          type="text" 
+          [(ngModel)]="newMilestoneTitle" 
+          placeholder="Specific physical deliverable or contract milestone..."
+          class="input-milestone-title"
+        />
+        <input 
+          type="text" 
+          [(ngModel)]="newMilestoneDueDate" 
+          placeholder="Target Week / Date"
+          class="input-milestone-due"
+        />
+        <button 
+          type="button" 
+          class="btn-submit-milestone" 
+          (click)="handleAddMilestone()">
+          + Anchor Step
+        </button>
+      </div>
+    </div>
+
+    <!-- Physical Evidence Anchor Field -->
+    <div class="evidence-field-box">
+      <label for="evidenceNotesInput">Physical Proof & Grounded Infrastructure</label>
+      <textarea 
+        id="evidenceNotesInput"
+        rows="2" 
+        [(ngModel)]="physicalAnchorEvidence" 
+        placeholder="Detail the tangible real-world receipts and structures supporting this creation..."></textarea>
+    </div>
+  </div>
+
+  <!-- 3. Grounding Checklist -->
+  <div class="checklist-card">
+    <h4 class="checklist-heading">
+      <span class="shield-icon">🛡</span>
+      <span>3. Grounding Checklist: Muladhara Physical Anchoring</span>
+    </h4>
+    <div class="checklist-items">
+      @for (task of groundingTasks; track task.id) {
+        <label 
+          class="check-item-row" 
+          [class.completed]="task.completed"
+          (click)="toggleGroundingTask(task.id)">
+          <span class="check-box-indicator">
+            @if (task.completed) { ✓ }
+          </span>
+          <span class="task-label">{{ task.label }}</span>
+        </label>
+      }
+    </div>
+  </div>
+</section>

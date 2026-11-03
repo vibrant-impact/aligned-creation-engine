@@ -1,6 +1,7 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 export interface IntentionItem {
   id: number | string;
@@ -40,37 +41,9 @@ interface ApiResponse<T> {
   providedIn: 'root'
 })
 export class IntentService {
-  private readonly defaultIntentions: IntentionItem[] = [
-    {
-      id: 1,
-      title: 'Launch Creative Studio',
-      category: 'Career & Business',
-      status: 'active',
-      totalNodes: 7,
-      alignedNodes: 5,
-      progressPercentage: 71
-    },
-    {
-      id: 2,
-      title: 'Publish My Novel',
-      category: 'Creative Expression',
-      status: 'active',
-      totalNodes: 7,
-      alignedNodes: 3,
-      progressPercentage: 43
-    },
-    {
-      id: 3,
-      title: 'Vibrant Health & Energy',
-      category: 'Vitality & Body',
-      status: 'active',
-      totalNodes: 7,
-      alignedNodes: 6,
-      progressPercentage: 86
-    }
-  ];
+  private readonly apiBaseUrl: string = 'http://localhost:8000'; 
 
-  private readonly intentionsSubject = new BehaviorSubject<IntentionItem[]>(this.defaultIntentions);
+  private readonly intentionsSubject = new BehaviorSubject<IntentionItem[]>([]);
   public readonly intentions$ = this.intentionsSubject.asObservable();
 
   constructor(private readonly httpClient: HttpClient) {}
@@ -133,5 +106,20 @@ export class IntentService {
     limitingBelief: string;
   }): Observable<ApiResponse<BeliefTransformation>> {
     return this.httpClient.post<ApiResponse<BeliefTransformation>>('/api/ai_reframe.php', payload);
+  }
+
+  public deleteIntention(intentionId: string | number): Observable<{ status: string; message: string }> {
+    return this.httpClient.post<{ status: string; message: string }>(
+      '/api/delete_intent.php',
+      { id: Number(intentionId) }
+    ).pipe(
+      tap(() => {
+        // Optimistically remove from frontend state
+        const updatedList = this.intentionsSubject.value.filter(
+          (item) => String(item.id) !== String(intentionId)
+        );
+        this.intentionsSubject.next(updatedList);
+      })
+    );
   }
 }
