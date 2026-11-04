@@ -42,7 +42,7 @@ export class WorkshopComponent implements OnInit {
 
   public readonly chakraTabs: ChakraMetadata[] = CHAKRA_LIST;
   public readonly chakraDictionary = CHAKRA_DICTIONARY;
-  public activeChakraId: ChakraIdentifier = 'solarPlexus';
+  public activeChakraId: ChakraIdentifier = 'crown';
 
   constructor(
     private readonly route: ActivatedRoute,

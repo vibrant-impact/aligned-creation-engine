@@ -443,6 +443,112 @@
   margin: 0;
 }
 
+/* Triad Comparison Section */
+.triad-pillars-section {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.pillar-card {
+  border-radius: 20px;
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.pillar-card:hover {
+  transform: translateY(-3px);
+}
+
+.pillar-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.pillar-status-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.pillar-title {
+  font-family: 'Cinzel', 'Playfair Display', 'Times New Roman', serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.pillar-text {
+  font-size: 0.9rem;
+  color: #cbd5e1;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* 1. The Manifestation Trap (Rose/Crimson) */
+.trap-manifestation {
+  background: rgba(255, 23, 68, 0.04);
+  border: 1px solid rgba(255, 64, 129, 0.22);
+}
+
+.trap-manifestation:hover {
+  border-color: rgba(255, 64, 129, 0.45);
+  box-shadow: 0 8px 32px rgba(255, 23, 68, 0.12);
+}
+
+.trap-manifestation .pillar-status-icon,
+.trap-manifestation .pillar-title {
+  color: #ff4081;
+}
+
+/* 2. The Productivity Trap (Amber/Gold) */
+.trap-productivity {
+  background: rgba(255, 171, 0, 0.04);
+  border: 1px solid rgba(255, 193, 7, 0.22);
+}
+
+.trap-productivity:hover {
+  border-color: rgba(255, 193, 7, 0.45);
+  box-shadow: 0 8px 32px rgba(255, 171, 0, 0.12);
+}
+
+.trap-productivity .pillar-status-icon,
+.trap-productivity .pillar-title {
+  color: #ffc107;
+}
+
+/* 3. Aligned Creation Engine (Emerald/Cyan) */
+.solution-engine {
+  background: rgba(0, 230, 118, 0.04);
+  border: 1px solid rgba(0, 230, 118, 0.28);
+}
+
+.solution-engine:hover {
+  border-color: rgba(0, 230, 118, 0.55);
+  box-shadow: 0 8px 32px rgba(0, 230, 118, 0.15);
+}
+
+.solution-engine .pillar-status-icon,
+.solution-engine .pillar-title {
+  color: #00e676;
+}
+
+@media (max-width: 960px) {
+  .triad-pillars-section {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* Responsive Breakdown */
 @media (max-width: 768px) {
   .stage-milestone-node {
