@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { AudioService } from '../../services/audio.service';
 import { CrownData, GroundingTask } from '../../models/manifestation.model';
 
+
 @Component({
   selector: 'app-crown-workshop',
   standalone: true,

@@ -1,0 +1,97 @@
+:host {
+  display: inline-block;
+}
+
+.brand-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.logo-mark {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+}
+
+/* Subtle Cosmic Animations */
+.orbit-ring {
+  transform-origin: 50px 50px;
+  animation: orbitRotate 24s linear infinite;
+}
+
+.triangle-down {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.center-singularity {
+  animation: singularityPulse 3s ease-in-out infinite;
+}
+
+.brand-link:hover .orbit-ring {
+  animation-duration: 8s;
+  stroke: rgba(0, 229, 255, 0.4);
+}
+
+.brand-link:hover .triangle-down {
+  transform: translateY(2px);
+  filter: drop-shadow(0 0 8px rgba(0, 229, 255, 0.8));
+}
+
+.brand-link:hover .center-singularity {
+  fill: #00e5ff;
+}
+
+@keyframes orbitRotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes singularityPulse {
+  0%, 100% {
+    r: 4.5;
+    opacity: 0.85;
+  }
+  50% {
+    r: 6;
+    opacity: 1;
+  }
+}
+
+/* Brand Text Styling */
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.brand-title {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  color: #ffffff;
+}
+
+.brand-subtitle {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #ffd600;
+  margin-top: 2px;
+}

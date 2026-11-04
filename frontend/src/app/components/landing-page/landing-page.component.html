@@ -1,0 +1,153 @@
+<div class="landing-page-wrapper">
+  <!-- Glowing Cosmic Background Orbs -->
+  <div class="cosmic-glow-orb crown-glow"></div>
+  <div class="cosmic-glow-orb solar-glow"></div>
+  <div class="cosmic-glow-orb root-glow"></div>
+
+  <!-- Hero Section -->
+  <header class="hero-section">
+    <div class="brand-pill-badge">
+      <span class="pulsing-sparkle">✧</span>
+      <span>ALIGNED CREATION ENGINE (ACE)</span>
+    </div>
+
+    <h1 class="hero-headline">
+      Align Subtle Intent.<br />
+      <span class="gradient-text">Manifest Physical Reality.</span>
+    </h1>
+
+    <p class="hero-subheading">
+      Traditional productivity treats goals as isolated checklists. Aligned Creation Engine 
+      systematically grounds intention through the ancient <strong>Downward Current of Manifestation</strong>—descending 
+      from ethereal purpose down through vocal truth, energetic coherence, and into dense physical execution.
+    </p>
+
+    <!-- First Goal Initiation Call to Action -->
+    <div class="cta-actions-row">
+      <button type="button" class="btn-primary-initiator" (click)="openInitiationModal()">
+        <span class="btn-icon">⚡</span>
+        <span>Initiate Your First Intention</span>
+      </button>
+
+      <button type="button" class="btn-secondary-dashboard" (click)="handleSkipToDashboard()">
+        <span>Explore Dashboard & Spine</span>
+        <span class="btn-arrow">→</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Interactive 7-Stage Descent Conduit Section -->
+  <section class="conduit-showcase-section">
+    <div class="section-header-block">
+      <span class="section-eyebrow">The 7-Stage Architectural Descent</span>
+      <h2 class="section-title">The Downward Current of Manifestation</h2>
+      <p class="section-description">
+        Energy travels downwards. Hover over each chakra node to harmonize with its calibrated Solfeggio frequency and explore its catalytic transformation.
+      </p>
+    </div>
+
+    <!-- Symmetrical Vertical Conduit Track -->
+    <div class="conduit-ladder-track">
+      <div class="central-glowing-stream"></div>
+
+      @for (stage of stages; track stage.number; let i = $index) {
+        <div 
+          class="stage-milestone-node"
+          [class.node-active]="hoveredStageIndex === i"
+          (mouseenter)="handleStageHover(i, stage.frequency)"
+          (mouseleave)="clearStageHover()">
+          
+          <!-- Left Pillar: Metadata -->
+          <div class="node-meta-side">
+            <span class="stage-tag" [style.color]="stage.colorHex">
+              Stage {{ stage.number }} • {{ stage.frequency }} Hz
+            </span>
+            <h3 class="stage-title">{{ stage.name }} ({{ stage.sanskrit }})</h3>
+            <span class="transformation-badge" [style.border-color]="stage.colorHex + '55'" [style.color]="stage.colorHex">
+              {{ stage.transformation }}
+            </span>
+          </div>
+
+          <!-- Central Glowing Conduit Orb -->
+          <div class="node-central-junction">
+            <div 
+              class="junction-orb"
+              [style.background-color]="stage.colorHex"
+              [style.box-shadow]="'0 0 16px ' + stage.colorHex">
+              <span class="junction-symbol">✧</span>
+            </div>
+            <div class="junction-connector" [style.border-color]="stage.colorHex"></div>
+          </div>
+
+          <!-- Right Pillar: Workshop Catalytic Tool Description -->
+          <div class="node-content-side">
+            <h4 class="stage-theme" [style.color]="stage.colorHex">{{ stage.theme }}</h4>
+            <p class="stage-description">{{ stage.description }}</p>
+          </div>
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- Three Core Pillars Section -->
+  <section class="triad-pillars-section">
+    <div class="pillar-card">
+      <div class="pillar-icon-box cyan-glow">
+        <svg class="pillar-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
+          <path d="M2 12h20"></path>
+        </svg>
+      </div>
+      <h3 class="pillar-title">Web Audio Solfeggio Synthesizer</h3>
+      <p class="pillar-text">
+        Pure harmonic sine waves, customizable binaural pulse offsets, and alignment chimes calibrated to soothe nervous system friction during creation.
+      </p>
+    </div>
+
+    <div class="pillar-card">
+      <div class="pillar-icon-box gold-glow">
+        <svg class="pillar-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+        </svg>
+      </div>
+      <h3 class="pillar-title">AI Subconscious Belief Alchemist</h3>
+      <p class="pillar-text">
+        Powered by Gemini AI to detect limiting subconscious self-doubt, reframe cognitive bottlenecks, and anchor them directly into kinetic micro-steps.
+      </p>
+    </div>
+
+    <div class="pillar-card">
+      <div class="pillar-icon-box orange-glow">
+        <svg class="pillar-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <path d="m4.93 4.93 4.24 4.24"></path>
+          <path d="m14.83 9.17 4.24-4.24"></path>
+          <path d="m14.83 14.83 4.24 4.24"></path>
+          <path d="m9.17 14.83-4.24 4.24"></path>
+          <circle cx="12" cy="12" r="4"></circle>
+        </svg>
+      </div>
+      <h3 class="pillar-title">Algorithmic Vector Sigil Engine</h3>
+      <p class="pillar-text">
+        Hermetic reduction and Pythagorean coordinate mapping transform your intentions into scalable SVG sacred geometry ready for visual focus or laser engraving.
+      </p>
+    </div>
+  </section>
+
+  <!-- Bottom Final Prompt Card -->
+  <section class="final-initiation-banner">
+    <div class="banner-content">
+      <h2 class="banner-title">Ready to Ground Your Vision?</h2>
+      <p class="banner-subtitle">
+        Enter your primary intention and let the 7-stage conduit guide you from abstract concept to tangible physical reality.
+      </p>
+      <button type="button" class="btn-primary-initiator" (click)="openInitiationModal()">
+        <span>✦ Begin Alignment Current</span>
+      </button>
+    </div>
+  </section>
+</div>
+
+<!-- Modal Triggered Directly from Landing Page -->
+<app-goal-modal [isOpen]="isGoalModalOpen" (closeModal)="closeInitiationModal()"></app-goal-modal>

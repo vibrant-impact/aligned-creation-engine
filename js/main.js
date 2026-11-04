@@ -1,4 +1,4 @@
-// Clean and unified main.js for The Creation Engine
+// Clean and unified main.js for The AlignedCreation Engine
 
 document.addEventListener("DOMContentLoaded", () => {
   // 1. Query elements safely inside DOMContentLoaded

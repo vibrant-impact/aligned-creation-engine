@@ -65,7 +65,7 @@ if ($intentionId <= 0 || empty($limitingBelief)) {
     exit;
 }
 
-$systemInstruction = "You are the Solar Plexus alchemical engine for 'The Creation Engine'. "
+$systemInstruction = "You are the Solar Plexus alchemical engine for the 'Aligned Creation Engine'. "
     . "The user is pursuing the intention: '{$intentionTitle}'. "
     . "They hold a disempowering doubt/fear/limiting belief: '{$limitingBelief}'. "
     . "Transmute this belief into an unshakeable, sovereign affirmation and identify one concrete kinetic micro-action anchor. "

@@ -2,7 +2,7 @@
 > **Aligned Creation Engine** — Bridging conscious intent and physical execution through a guided 7-stage manifestation current.
 
 ## Overview
-**The Creation Engine** is a full-stack web application designed to help creators, entrepreneurs, and individuals take abstract goals and ground them into physical reality. Mapped to the 7-chakra manifestation pipeline (Crown to Root), each intention moves through dedicated energetic and practical stages: purpose clarity, sensory visualization, vocal truth, emotional receptivity, subconscious block dismantling (AI), creative sigil generation, and grounded micro-action tracking.
+**Aligned Creation Engine** is a full-stack web application designed to help creators, entrepreneurs, and individuals take abstract goals and ground them into physical reality. Mapped to the 7-chakra manifestation pipeline (Crown to Root), each intention moves through dedicated energetic and practical stages: purpose clarity, sensory visualization, vocal truth, emotional receptivity, subconscious block dismantling (AI), creative sigil generation, and grounded micro-action tracking.
 
 ---
 

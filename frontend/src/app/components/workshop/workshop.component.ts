@@ -14,6 +14,7 @@ import { IntentService, IntentionItem } from '../../services/intent.service';
 import { AudioService } from '../../services/audio.service';
 import { CHAKRA_LIST, CHAKRA_DICTIONARY } from '../../utils/chakras.data';
 import { ChakraIdentifier, ChakraMetadata } from '../../models/manifestation.model';
+import { ChakraMeditationTimerComponent } from '../chakra-meditation-timer/chakra-meditation-timer.component';
 
 @Component({
   selector: 'app-workshop',
@@ -23,6 +24,7 @@ import { ChakraIdentifier, ChakraMetadata } from '../../models/manifestation.mod
     FormsModule,
     RouterLink,
     AlignmentSpineComponent,
+    ChakraMeditationTimerComponent,
     SolarPlexusWorkshopComponent,
     SacralWorkshopComponent,
     ThirdEyeWorkshopComponent,

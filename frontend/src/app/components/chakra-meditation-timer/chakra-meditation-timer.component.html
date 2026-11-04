@@ -1,0 +1,48 @@
+<div class="meditation-timer-card" [style.border-color]="colorHex + '35'">
+  <div class="timer-top-bar">
+    <div class="timer-identity">
+      <span class="frequency-indicator-dot" [style.background-color]="colorHex" [style.box-shadow]="'0 0 10px ' + colorHex"></span>
+      <span class="timer-tag" [style.color]="colorHex">
+        {{ frequencyHz }} Hz • {{ chakraName }} Meditation
+      </span>
+    </div>
+
+    <!-- Duration Presets -->
+    <div class="preset-pills">
+      @for (mins of [3, 5, 10, 15]; track mins) {
+        <button 
+          type="button" 
+          class="btn-preset" 
+          [class.selected]="durationMinutes === mins"
+          [disabled]="isTimerActive"
+          (click)="setDuration(mins)">
+          {{ mins }}m
+        </button>
+      }
+    </div>
+  </div>
+
+  <div class="timer-center-body">
+    <div class="countdown-display" [style.color]="isTimerActive ? colorHex : '#ffffff'">
+      {{ formatTimerDisplay(secondsRemaining) }}
+    </div>
+
+    <div class="timer-controls">
+      <button 
+        type="button" 
+        class="btn-toggle-meditation"
+        [style.background-color]="isTimerActive ? '#ef4444' : colorHex"
+        (click)="toggleSession()">
+        {{ isTimerActive ? '❚❚ Pause Resonance' : '▶ Begin ' + frequencyHz + ' Hz Resonance' }}
+      </button>
+
+      <button 
+        type="button" 
+        class="btn-reset-meditation" 
+        (click)="resetSession()"
+        title="Reset Timer">
+        ↺
+      </button>
+    </div>
+  </div>
+</div>

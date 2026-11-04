@@ -44,6 +44,16 @@
         <p class="hero-stage-desc">{{ currentChakra.title }}</p>
       </div>
 
+     <!-- Chakra Resonant Timer Widget -->
+      <div class="hero-timer-container">
+        <app-chakra-meditation-timer 
+          [chakraName]="currentChakra.name" 
+          [frequencyHz]="currentChakra.frequencyHz"
+          [colorHex]="currentChakra.colorHex"
+          [durationMinutes]="5">
+        </app-chakra-meditation-timer>
+      </div>
+
       <div class="seed-mantra-box">
         <span class="mantra-label">Seed Mantra</span>
         <span class="mantra-value">{{ currentChakra.seedMantra }}</span>

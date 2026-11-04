@@ -1,67 +1,14 @@
 <header class="app-header">
   <div class="brand">
-    <div class="logo-mark">✧</div>
-    <div>
-      <h1 class="logo-title">The Creation Engine</h1>
-      <p class="tagline">Aligning Intent. Manifesting Reality.</p>
-    </div>
+    <app-brand-logo [size]="44" [showText]="true"></app-brand-logo>
   </div>
 
   <nav class="nav-links">
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
     <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
-    <a href="#">Create New Intent</a>
-    <a href="#">My Journeys</a>
+    <a routerLink="/dashboard" class="nav-ghost-link">My Journeys</a>
 
-    <!-- Solfeggio Resonance Audio Pill -->
-    <div class="audio-resonance-pill" [class.playing]="audioService.isPlaying">
-      <!-- Interactive Toggle Button -->
-      <button 
-        type="button" 
-        class="audio-toggle-button" 
-        [class.active]="audioService.isPlaying"
-        (click)="toggleTonePlayback()"
-        [attr.aria-label]="audioService.isPlaying ? 'Stop Solfeggio Resonance' : 'Play Solfeggio Resonance'">
-        
-        @if (audioService.isPlaying) {
-          <!-- Speaker Playing Icon -->
-          <svg class="audio-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-            <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
-            <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
-          </svg>
-          <span class="pill-label-active">{{ selectedFrequency }}Hz</span>
-        } @else {
-          <!-- Speaker Muted / Idle Icon -->
-          <svg class="audio-icon muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-            <line x1="23" y1="9" x2="17" y2="15"></line>
-            <line x1="17" y1="9" x2="23" y2="15"></line>
-          </svg>
-          <span class="pill-label-idle">Tone</span>
-        }
-      </button>
-
-      <!-- Frequency Selector Dropdown Wrapper -->
-      <div class="frequency-select-wrapper">
-        <select 
-          class="frequency-select-input" 
-          [value]="selectedFrequency" 
-          (change)="handleFrequencySelection($event)"
-          title="Select Solfeggio Frequency">
-          @for (chakra of availableChakras; track chakra.id) {
-            <option [value]="chakra.frequencyHz">
-              {{ chakra.frequencyHz }}Hz - {{ chakra.sanskrit }} ({{ chakra.name }})
-            </option>
-          }
-        </select>
-        <!-- Custom Chevron Down Arrow -->
-        <svg class="chevron-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="6 9 12 15 18 9"></polyline>
-        </svg>
-      </div>
-    </div>
-
-    <button class="btn-account">Account</button>
+    <button type="button" class="btn-account">Account</button>
   </nav>
 </header>
 

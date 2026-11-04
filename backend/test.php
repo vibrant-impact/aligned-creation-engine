@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 // Simulate fetching server and app health status
 $response = [
     'status' => 'success',
-    'message' => 'The Creation Engine API is connected and responding.',
+    'message' => 'Aligned Creation Engine API is connected and responding.',
     'serverTime' => date('Y-m-d H:i:s'),
     'environment' => [
         'phpVersion' => phpversion(),
