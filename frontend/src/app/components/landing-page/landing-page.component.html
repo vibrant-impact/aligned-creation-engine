@@ -149,4 +149,8 @@
 </div>
 
 <!-- Modal Triggered Directly from Landing Page -->
-<app-goal-modal [isOpen]="isGoalModalOpen" (closeModal)="closeInitiationModal()"></app-goal-modal>
+<app-goal-modal 
+  [isOpen]="isGoalModalOpen" 
+  (closeModal)="closeInitiationModal()"
+  (intentionCreated)="handleIntentionCreated()">
+</app-goal-modal>

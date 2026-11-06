@@ -13,6 +13,7 @@ import { IntentService } from '../../services/intent.service';
 export class GoalModalComponent {
   @Input() public isOpen: boolean = false;
   @Output() public readonly closeModal = new EventEmitter<void>();
+  @Output() public readonly intentionCreated = new EventEmitter<void>();
 
   public goalTitle: string = '';
   public goalCategory: string = '';
@@ -46,7 +47,10 @@ export class GoalModalComponent {
     this.intentService.createIntent(payload).subscribe({
       next: () => {
         this.isSubmitting = false;
-        this.handleClose();
+        this.intentionCreated.emit();
+        this.goalTitle = '';
+        this.goalCategory = '';
+        this.closeModal.emit();
       },
       error: (error) => {
         this.isSubmitting = false;

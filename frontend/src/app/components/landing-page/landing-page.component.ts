@@ -113,6 +113,12 @@ export class LandingPageComponent {
     this.isGoalModalOpen = false;
   }
 
+  public handleIntentionCreated(): void {
+    this.isGoalModalOpen = false;
+    this.audioService.playAlignmentChime(963); // Crown frequency chime celebrating creation
+    this.router.navigate(['/dashboard']);
+  }
+
   public handleStageHover(index: number, frequency: number): void {
     this.hoveredStageIndex = index;
     this.audioService.playAlignmentChime(frequency);

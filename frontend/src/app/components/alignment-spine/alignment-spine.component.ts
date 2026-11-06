@@ -11,7 +11,7 @@ import { ChakraIdentifier, ChakraMetadata } from '../../models/manifestation.mod
   styleUrl: './alignment-spine.component.css'
 })
 export class AlignmentSpineComponent {
-  @Input() public activeChakraKey: ChakraIdentifier = 'solarPlexus';
+  @Input() public activeChakraKey: ChakraIdentifier = 'crown';
   @Output() public chakraSelected = new EventEmitter<ChakraIdentifier>();
 
   public readonly chakras: ChakraMetadata[] = CHAKRA_LIST;

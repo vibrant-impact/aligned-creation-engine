@@ -54,9 +54,17 @@
         </app-chakra-meditation-timer>
       </div>
 
-      <div class="seed-mantra-box">
+      <div 
+        class="seed-mantra-box"
+        [style.border-color]="currentChakra.colorHex + '40'"
+        [style.box-shadow]="'0 0 15px ' + currentChakra.colorHex + '20'">
         <span class="mantra-label">Seed Mantra</span>
-        <span class="mantra-value">{{ currentChakra.seedMantra }}</span>
+        <span 
+          class="mantra-value" 
+          [style.color]="currentChakra.colorHex"
+          [style.text-shadow]="'0 0 12px ' + currentChakra.colorHex + '80'">
+          {{ currentChakra.seedMantra }}
+        </span>
       </div>
     </header>
 
